@@ -1,0 +1,268 @@
+﻿@page
+@using BlogRazorPage.Infrastructure;
+@model BlogRazorPage.Pages.Front.Blog.ListProductsModel
+@{
+    Layout = "Shared/_Index";
+    ViewData["Title"] = "وبلاگ ها";
+}
+@section Headers
+    {
+    <link id="rtl-link" rel="stylesheet" type="text/css" href="~/assets/css/vendors/bootstrap.css">
+    <link id="rtl-link" rel="stylesheet" type="text/css" href="~/assets/css/vendors/bootstrap.rtl.css">
+    <link rel="stylesheet" href="assets/css/animate.min.css" />
+    <link rel="stylesheet" type="text/css" href="~/assets/css/vendors/font-awesome.css">
+    <link rel="stylesheet" type="text/css" href="~/assets/css/vendors/feather-icon.css">
+    <link rel="stylesheet" type="text/css" href="~/assets/css/vendors/slick/slick.css">
+    <link rel="stylesheet" type="text/css" href="~/assets/css/vendors/slick/slick-theme.css">
+    <link rel="stylesheet" type="text/css" href="~/assets/css/bulk-style.css">
+    <link id="color-link" rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <link rel="stylesheet" href="~/assets/css/custom.css">
+    <link rel="stylesheet" href="~/assets/css/font.css">
+    
+    <link id="rtl-link" rel="stylesheet" type="text/css" href="~/assets/css/vendors/bootstrap.css">
+    <link id="rtl-link" rel="stylesheet" type="text/css" href="~/assets/css/vendors/bootstrap.rtl.css">
+    <link rel="stylesheet" href="~/assets/css/animate.min.css" />
+    <link rel="stylesheet" type="text/css" href="~/assets/css/vendors/font-awesome.css">
+    <link rel="stylesheet" type="text/css" href="~/assets/css/vendors/feather-icon.css">
+    <link rel="stylesheet" type="text/css" href="~/assets/css/vendors/slick/slick.css">
+    <link rel="stylesheet" type="text/css" href="~/assets/css/vendors/slick/slick-theme.css">
+    <link rel="stylesheet" type="text/css" href="~/assets/css/bulk-style.css">
+    <link id="color-link" rel="stylesheet" type="text/css" href="~/assets/css/style.css">
+    <link rel="stylesheet" href="~/assets/css/custom.css">
+    <link rel="stylesheet" href="~/assets/css/font.css">
+    }
+<section class="blog-section section-b-space">
+    <div class="container-fluid-lg">
+        <div class="row g-4">
+            <div class="col-xxl-9 col-xl-8 col-lg-7 order-lg-2">
+                <div class="row g-4">
+                    
+                    @{
+                        foreach(var item in Model.result.Data)
+                        {
+                            <div class="col-12">
+                                <div class="blog-box blog-list wow fadeInUp">
+                                    
+                                       <div class="blog-image">
+                                          
+                                          <a href="detail?slug=@item.Slug">
+                                            <img src="@Directories.GetProductImage(item.ImageName)" style="weight:450px;height:299px;" class="blur-up lazyload" alt="">
+                                          </a>
+
+                                       </div>
+
+                                    <div class="blog-contain blog-contain-2">
+                                        <div class="blog-label">
+                                            <span class="time"><i data-feather="clock"></i> <span>@item.CreationDate</span></span>
+                                            <span class="super"><i data-feather="user"></i> <span>@item.UserFullName</span></span>
+                                        </div>
+                                        <a asp-route-slug="@item.Slug" asp-page="detail">
+                                            <h3>@item.Title</h3>
+                                        </a>
+                                          <p>
+                                              @*@Html.Raw(item.Description)*@
+                                              @item.MetaDescription
+                                          </p>
+                                        <button onClick="location.href='detail?slug=@item.Slug'" asp-page="Detail" asp-route-id="@item.Id" class="blog-button">
+
+                                            بیشتر بخوانید
+                                            <i class="fa-solid fa-left-long"></i>
+
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+
+                @{
+                    <nav class="custome-pagination">
+                        <ul class="pagination justify-content-center">
+
+                            @if (Model.result.CurrentPage == 1)
+                            {
+
+                                <li class="page-item disabled">
+                                    <a class="page-link prev" onclick="changeCommentPage('@(Model.result.CurrentPage - 1)')" href="javascript:void(0)" tabindex="-1" aria-disabled="true">
+                                        <i class="fa-solid fa-angles-right"></i>
+                                    </a>
+                                </li>
+                            }
+
+
+
+                            @if (Model.result.CurrentPage > 1)
+                            {
+                                int prevpage = Model.result.CurrentPage - 1;
+                                <li class="page-item">
+                                    <a class="page-link prev" onclick="changeCommentPage('@(Model.result.CurrentPage - 1)')" href="?pageId=@prevpage&take=8" tabindex="-1" aria-disabled="true">
+                                        <i class="fa-solid fa-angles-right"></i>
+                                    </a>
+                                </li>
+                            }
+
+
+                            @for (var i = Model.result.StartPage; i <= Model.result.EndPage; i++)
+                            {
+
+                                @if (i == Model.result.CurrentPage)
+                                {
+                                    <li class="page-item active">
+                                        <a class="page-link current" href="javascript:void(0)">@i</a>
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li class="page-item" aria-current="page">
+                                        <a class="page-link " onclick="changeCommentPage('@i')" href="?pageId=@i&take=9">@i</a>
+                                    </li>
+                                }
+
+                            }
+
+
+                            @{
+                                int nextpage = Model.result.CurrentPage + 1;
+                                @if (Model.result.CurrentPage != Model.result.EndPage)
+                                {
+                                    <li class="page-item">
+                                        <a class="page-link next" onclick="changeCommentPage('@(Model.result.CurrentPage + 1)')" href="?pageId=@nextpage&take=8" tabindex="+1" aria-disabled="true">
+                                            <i class="fa-solid fa-angles-left"></i>
+                                        </a>
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li class="page-item disabled">
+                                        <a class="page-link next" onclick="changeCommentPage('@(Model.result.CurrentPage + 1)')" href="?pageId=@nextpage&take=8" tabindex="+1" aria-disabled="true">
+                                            <i class="fa-solid fa-angles-left"></i>
+                                        </a>
+                                    </li>
+                                }
+
+                            }
+                        </ul>
+                    </nav>
+                }
+
+            </div>
+
+            <div class="col-xxl-3 col-xl-4 col-lg-5 order-lg-1">
+                <div class="left-sidebar-box wow fadeInUp">
+                    
+
+                    <div class="accordion left-accordion-box" id="accordionPanelsStayOpenExample">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
+                                        aria-controls="panelsStayOpen-collapseOne">
+                                    پست های اخیر
+                                </button>
+                            </h2>
+                            <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show"
+                                 aria-labelledby="panelsStayOpen-headingOne">
+                                <div class="accordion-body pt-0">
+                                    <div class="recent-post-box">
+                                        @{
+                                            foreach (var item in Model.latestResult.Data)
+                                            {
+                                                <div class="recent-box">
+                                                    <a href="?slug=@item.Slug" class="recent-image">
+                                                        <img src="@Directories.GetProductImage(item.ImageName)"
+                                                             class="img-fluid blur-up lazyload" alt="">
+                                                    </a>
+
+                                                    <div class="recent-detail">
+                                                        <a href="?id=@item.Id">
+                                                            <h5 class="recent-name">@item.Title</h5>
+                                                        </a>
+                                                        <h6>@item.CreationDate <i data-feather="thumbs-up"></i></h6>
+                                                    </div>
+                                                </div>
+                                            }
+                                        }
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false"
+                                        aria-controls="panelsStayOpen-collapseTwo">
+                                    دسته بندی
+                                </button>
+                            </h2>
+                            <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse collapse show"
+                                 aria-labelledby="panelsStayOpen-headingTwo">
+                                <div class="accordion-body p-0">
+                                    <div class="category-list-box">
+                                        <ul>
+                                            @{
+                                                foreach (var item in Model.categories)
+                                                {
+                                                    <li>
+                                                        <a asp-page="ListProducts" asp-route-id="@item.posts.Select(i=>i.CategoryId).FirstOrDefault()">
+                                                            <div class="category-name">
+                                                                <h5>@item.Title</h5>
+                                                                <span>@item.posts.Count()</span>
+                                                            </div>
+                                                        </a>
+                                                    </li>
+                                                }
+                                            }
+
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+@section Scripts
+{
+    
+    <script src="~/assets/js/jquery-3.6.0.min.js"></script>
+    <script src="~/assets/js/jquery-ui.min.js"></script>
+    <script src="~/assets/js/bootstrap/bootstrap.bundle.min.js"></script>
+    <script src="~/assets/js/bootstrap/popper.min.js"></script>
+    <script src="~/assets/js/bootstrap/bootstrap-notify.min.js"></script>
+    <script src="~/assets/js/feather/feather.min.js"></script>
+    <script src="~/assets/js/feather/feather-icon.js"></script>
+    <script src="~/assets/js/lazysizes.min.js"></script>
+    <script src="~/assets/js/slick/slick.js"></script>
+    <script src="~/assets/js/slick/slick-animation.min.js"></script>
+    <script src="~/assets/js/slick/custom_slick.js"></script>
+    <script src="~/assets/js/ion.rangeSlider.min.js"></script>
+    <script src="~/assets/js/quantity-2.js"></script>
+    <script src="~/assets/js/filter-sidebar.js"></script>
+    <script src="~/assets/js/wow.min.js"></script>
+    <script src="~/assets/js/custom-wow.js"></script>
+    <script src="~/assets/js/script.js"></script>
+    <script src="~/assets/js/theme-setting.js"></script>
+    
+
+    <script src="~/assets/js/jquery-3.6.0.min.js"></script>
+    <script src="~/assets/js/jquery-ui.min.js"></script>
+    <script src="~/assets/js/bootstrap/bootstrap.bundle.min.js"></script>
+    <script src="~/assets/js/bootstrap/bootstrap-notify.min.js"></script>
+    <script src="~/assets/js/bootstrap/popper.min.js"></script>
+    <script src="~/assets/js/feather/feather.min.js"></script>
+    <script src="~/assets/js/feather/feather-icon.js"></script>
+    <script src="~/assets/js/lazysizes.min.js"></script>
+    <script src="~/assets/js/slick/slick.js"></script>
+    <script src="~/assets/js/slick/slick-animation.min.js"></script>
+    <script src="~/assets/js/slick/custom_slick.js"></script>
+    <script src="~/assets/js/wow.min.js"></script>
+    <script src="~/assets/js/custom-wow.js"></script>
+    <script src="~/assets/js/script.js"></script>
+    <script src="~/assets/js/theme-setting.js"></script>
+}

@@ -1,0 +1,212 @@
+﻿<!DOCTYPE html>
+
+<html lang="fa" dir="rtl">
+<head>
+    @* <partial name="AdminPartials/_Head1" />*@
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+          content="Fastkart admin is super flexible, powerful, clean &amp; modern responsive bootstrap 5 admin template with unlimited possibilities.">
+    <meta name="keywords"
+          content="admin template, Fastkart admin template, dashboard template, flat admin template, responsive admin template, web app">
+    <meta name="author" content="pixelstrap">
+    <link rel="icon" href="~/AdminAssets/assets/images/favicon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="~/AdminAssets/assets/images/favicon.png" type="image/x-icon">
+    <title>@ViewData["Title"]</title>
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="~/AdminAssets/assets/css/linearicon.css">
+    <link rel="stylesheet" type="text/css" href="~/AdminAssets/assets/css/vendors/font-awesome.css">
+    <link rel="stylesheet" type="text/css" href="~/AdminAssets/assets/css/vendors/themify.css">
+    <link rel="stylesheet" type="text/css" href="~/AdminAssets/assets/css/vendors/dropzone.css">
+    <link rel="stylesheet" type="text/css" href="~/AdminAssets/assets/css/vendors/feather-icon.css">
+    <link rel="stylesheet" type="text/css" href="~/AdminAssets/assets/css/remixicon.css">
+    <link rel="stylesheet" type="text/css" href="~/AdminAssets/assets/css/select2.min.css">
+    <link rel="stylesheet" type="text/css" href="~/AdminAssets/assets/css/vendors/scrollbar.css">
+    <link rel="stylesheet" type="text/css" href="~/AdminAssets/assets/css/vendors/animate.css">
+    <link rel="stylesheet" type="text/css" href="~/AdminAssets/assets/css/vendors/chartist.css">
+    <link rel="stylesheet" type="text/css" href="~/AdminAssets/assets/css/vendors/date-picker.css">
+    <link rel="stylesheet" type="text/css" href="~/AdminAssets/assets/css/vendors/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="~/AdminAssets/assets/css/vendors/bootstrap-tagsinput.css">
+    <link rel="stylesheet" type="text/css" href="~/AdminAssets/assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="~/AdminAssets/assets/css/font.css">
+    <link rel="stylesheet" type="text/css" href="~/AdminAssets/assets/css/custom.css">
+
+
+    @await RenderSectionAsync("Header", required: false)
+
+</head>
+<body>
+    <div class="page-wrapper compact-wrapper" id="pageWrapper">
+
+       @* <partial name="AdminPartials/_Header1" />*@
+        <div class="page-header">
+            <div class="header-wrapper m-0">
+                <div class="header-logo-wrapper p-0">
+                    <div class="logo-wrapper">
+                        <a href="index.html">
+                            <img class="img-fluid main-logo" src="~/AdminAssets/assets/images/logo/1.png" alt="logo">
+                            <img class="img-fluid white-logo" src="~/AdminAssets/assets/images/logo/1-white.png" alt="logo">
+                        </a>
+                    </div>
+                    <div class="toggle-sidebar">
+                        <i class="status_toggle middle sidebar-toggle" data-feather="align-center"></i>
+                        <a href="index.html">
+                            <img src="~/AdminAssets/assets/images/logo/1.png" class="img-fluid" alt="">
+                        </a>
+                    </div>
+                </div>
+
+                <form class="form-inline search-full" action="javascript:void(0)" method="get">
+                    <div class="form-group w-100">
+                        <div class="Typeahead Typeahead--twitterUsers">
+                            <div class="u-posRelative">
+                                <input class="demo-input Typeahead-input form-control-plaintext w-100" type="text"
+                                       placeholder="جستجو کنید ..." name="q" title="" autofocus>
+                                <i class="close-search" data-feather="x"></i>
+                                <div class="spinner-border Typeahead-spinner" role="status">
+                                    <span class="sr-only">لطفا صبر کنید ...</span>
+                                </div>
+                            </div>
+                            <div class="Typeahead-menu"></div>
+                        </div>
+                    </div>
+                </form>
+                <div class="nav-right col-6 pull-right right-header p-0">
+                    <ul class="nav-menus">
+                        <li>
+                            <span class="header-search">
+                                <i class="ri-search-line"></i>
+                            </span>
+                        </li>
+                        <li class="onhover-dropdown">
+                            <div class="notification-box">
+                                <i class="ri-notification-line"></i>
+                                <span class="badge rounded-pill badge-theme">4</span>
+                            </div>
+                            <ul class="notification-dropdown onhover-show-div">
+                                <li>
+                                    <i class="ri-notification-line"></i>
+                                    <h6 class="f-18 mb-0">پیام ها</h6>
+                                </li>
+                                <li>
+                                    <p>
+                                        <i class="fa fa-circle me-2 font-primary"></i>پردازش محصولات<span class="pull-right">10 دقیقه</span>
+                                    </p>
+                                </li>
+                                <li>
+                                    <p>
+                                        <i class="fa fa-circle me-2 font-success"></i>تکمیل سفارش<span class="pull-right">1 ساعت</span>
+                                    </p>
+                                </li>
+                                <li>
+                                    <p>
+                                        <i class="fa fa-circle me-2 font-info"></i>بلیط های تولید شده<span class="pull-right">3 ساعت</span>
+                                    </p>
+                                </li>
+                                <li>
+                                    <p>
+                                        <i class="fa fa-circle me-2 font-danger"></i>تحویل کامل<span class="pull-right">6 ساعت</span>
+                                    </p>
+                                </li>
+                                <li>
+                                    <a class="btn btn-primary" href="javascript:void(0)">نمایش تمام پیام ها</a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li>
+                            <div class="mode">
+                                <i class="ri-moon-line"></i>
+                            </div>
+                        </li>
+                        <li class="profile-nav onhover-dropdown pe-0 me-0">
+                            <div class="media profile-media">
+                                <img class="user-profile rounded-circle" src="~/AdminAssets/assets/images/users/4.jpg" alt="">
+                                <div class="user-name-hide media-body">
+                                    <span>امین احمدی</span>
+                                    <p class="mb-0 font-roboto">مدیر<i class="middle ri-arrow-down-s-line"></i></p>
+                                </div>
+                            </div>
+                            <ul class="profile-dropdown onhover-show-div">
+                                <li>
+                                    <a href="all-users.html">
+                                        <i data-feather="users"></i>
+                                        <span>کاربران</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="order-list.html">
+                                        <i data-feather="archive"></i>
+                                        <span>سفارشات</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="support-ticket.html">
+                                        <i data-feather="phone"></i>
+                                        <span>تیکت پشتیبانی</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="profile-setting.html">
+                                        <i data-feather="settings"></i>
+                                        <span>تنظیمات</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a data-bs-toggle="modal" data-bs-target="#staticBackdrop"
+                                       href="javascript:void(0)">
+                                        <i data-feather="log-out"></i>
+                                        <span>خروج</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    @RenderBody()
+
+      @*  <partial name="AdminPartials/_footer1" />*@
+        
+        <div id="ajax-token">@Html.AntiForgeryToken()</div>
+
+    </div>
+
+
+@*<partial name="AdminPartials/_Scripts1" />*@
+    <script src="~/AdminAssets/assets/js/jquery-3.6.0.min.js"></script>
+    <script src="~/AdminAssets/assets/js/bootstrap/bootstrap.bundle.min.js"></script>
+    <script src="~/AdminAssets/assets/js/icons/feather-icon/feather.min.js"></script>
+    <script src="~/AdminAssets/assets/js/icons/feather-icon/feather-icon.js"></script>
+    <script src="~/AdminAssets/assets/js/scrollbar/simplebar.js"></script>
+    <script src="~/AdminAssets/assets/js/scrollbar/custom.js"></script>
+    <script src="~/AdminAssets/assets/js/config.js"></script>
+    <script src="~/AdminAssets/assets/js/bootstrap-tagsinput.min.js"></script>
+    <script src="~/AdminAssets/assets/js/sidebar-menu.js"></script>
+    <script src="~/AdminAssets/assets/js/customizer.js"></script>
+    <script src="~/AdminAssets/assets/js/dropzone/dropzone.js"></script>
+    <script src="~/AdminAssets/assets/js/dropzone/dropzone-script.js"></script>
+    <script src="~/AdminAssets/assets/js/notify/bootstrap-notify.min.js"></script>
+    <script src="~/AdminAssets/assets/js/notify/index.js"></script>
+    <script src="~/AdminAssets/assets/js/ckeditor.js"></script>
+    <script src="~/AdminAssets/assets/js/ckeditor-custom.js"></script>
+    <script src="~/AdminAssets/assets/js/select2.min.js"></script>
+    <script src="~/AdminAssets/assets/js/select2-custom.js"></script>
+    <script src="~/AdminAssets/assets/js/sidebareffect.js"></script>
+    <script src="~/AdminAssets/assets/js/script.js"></script>
+
+    @*<script src="~/Custom.js"></script>*@
+
+
+
+    <script src="~/global.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+@await RenderSectionAsync("Scripts", required: false)
+
+</body>
+<html/>

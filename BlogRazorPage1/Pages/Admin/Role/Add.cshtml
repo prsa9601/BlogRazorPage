@@ -1,0 +1,65 @@
+﻿@page
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using BlogRazorPage.Infrastructure
+@using BlogRazorPage.TagHelpers
+@model BlogRazorPage.Pages.Admin.Role.AddModel
+@{
+    Layout = "Shared/AdminLayout/_AdminLayout";
+    ViewData["Title"] = "افزودن نقش ";
+    ViewData["selected"] = "roles";
+}
+@section Header
+{
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <link href="path/to/select2.min.css" rel="stylesheet" />
+    <script src="path/to/select2.min.js"></script>
+    <link href="vendor/select2/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="vendor/select2/dist/js/select2.min.js"></script>
+}
+
+<div class="page-body">
+<div class="container-fluid">
+<div class="row">
+<div class="col-sm-12">
+<div class="card card-table">
+<div class="card-body">
+<main class="page-content">
+    <div class="container">
+
+    <form class="card" method="post">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    @Html.EditorFor(f=>f.Title)
+                </div>
+                <div class="col-md-6">
+                   @* <label>انتخاب دسترسی ها</label>
+                    <select class="select2 form-control" multiple="multiple" name="permission[]">
+                   *@     @foreach (var item in Enum.GetNames(typeof(Permission)))
+                        {
+                            var id = Guid.NewGuid();
+
+                            <div class="form-check">
+                                <input name="permission[]" class="form-check-input" id="@id" type="checkbox" value="@item">
+                                <label class="form-check-label" for="@id">
+                                    @item.Replace("_", " ")
+                                </label>
+                            </div>
+                            @*<option value="@item">@item.Replace("_", " ")</option>*@
+                        }
+               @*     </select>*@
+                </div>
+            </div>
+        </div>
+        
+
+
+        <div class="card-footer text-left">
+            <cancel></cancel>
+            <submit />
+        </div>
+    </form>
+    </div>
+</main>
+</div></div></div></div></div></div></div>

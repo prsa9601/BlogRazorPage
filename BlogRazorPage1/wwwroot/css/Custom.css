@@ -1,0 +1,12 @@
+﻿.field-validation-error {
+    color: red
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+.input-validation-error {
+    border-color: red !important;
+    visibility:visible !important;
+}

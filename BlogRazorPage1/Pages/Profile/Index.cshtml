@@ -1,0 +1,698 @@
+﻿@page "{handler?}"
+@inject IUserService UserService
+@using BlogRazorPage.Infrastructure
+@using BlogRazorPage.Services.User
+@using BlogRazorPage.Models.User
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model BlogRazorPage.Pages.Profile.IndexModel
+@using BlogRazorPage.Services.Category
+@inject ICategoryService service
+@{
+   
+    Layout = "Shared/_Index";
+    ViewData["Title"] = "پروفایل";
+}
+@{
+    var categories = service.GetCategories();
+    var category = categories.Result.Take(5);
+}
+@{
+    // if (User.Identity.IsAuthenticated)
+    // { }
+    var user = await UserService.GetCurrentUser();
+    
+}
+@section Headers
+{
+    <link rel="stylesheet" type="text/css" href="~/css/Custom.css">
+
+}
+
+<!-- User Dashboard Section Start -->
+<section class="user-dashboard-section section-b-space">
+    <div class="container-fluid-lg">
+        <div class="row">
+            <div class="col-xxl-3 col-lg-4">
+                <div class="dashboard-left-sidebar">
+                    <div class="close-button d-flex d-lg-none">
+                        <button class="close-sidebar">
+                            <i class="fa-solid fa-xmark"></i>
+                        </button>
+                    </div>
+                    <div class="profile-box">
+                        <div class="cover-image">
+                            <img src="assets/images/inner-page/cover-img.jpg" class="img-fluid blur-up lazyload"
+                                 alt="">
+                        </div> 
+                     
+                        <div class="profile-contain">
+                            <div class="profile-image">
+                                <div class="position-relative">
+                                    <img src="@Directories.GetAvatar(user.AvatarName)"
+                                         class="blur-up lazyload update_img" alt="">
+                           @*          <div class="cover-icon">
+                                        <i class="fa-solid fa-pen">
+                                            <input asp-for="@Model.Avatar" type="file" onchange="document.getElementById('SavePic').submit();" onchange="readURL(this,0)">
+                                        </i>
+                                    </div> *@
+                                </div>
+                            </div>
+                        @*     <form id="SavePic" asp-page-handler="SavePic" asp-page="Index" method="post" style="display:none;" enctype="multipart/form-data">
+                                <input asp-for="@Model.Avatar" type="file" hidden/>
+                            </form> *@
+                            <div class="profile-name">
+                                <h3>@user.Name @user.Family</h3>
+                                <h6 class="text-content">@user.PhoneNumber</h6>
+                            </div>
+                        </div>
+                    </div>
+
+                    <ul class="nav nav-pills user-nav-pills" id="pills-tab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="pills-dashboard-tab" data-bs-toggle="pill"
+                                    data-bs-target="#pills-dashboard" type="button" role="tab"
+                                    aria-controls="pills-dashboard" aria-selected="true">
+                                <i data-feather="home"></i>
+                                داشبورد
+                            </button>
+                        </li>
+
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill"
+                                    data-bs-target="#pills-profile" type="button" role="tab"
+                                    aria-controls="pills-profile" aria-selected="false">
+                                <i data-feather="user"></i>
+                                پروفایل
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-xxl-9 col-lg-8">
+                <div class="dashboard-right-sidebar">
+                    <div class="tab-content" id="pills-tabContent">
+                        <div class="tab-pane fade show active" id="pills-dashboard" role="tabpanel"
+                             aria-labelledby="pills-dashboard-tab">
+                            <div class="dashboard-home">
+                                <div class="title">
+                                    <h2>داشبورد من</h2>
+                                    <span class="title-leaf">
+                                        <svg class="icon-width bg-gray">
+                                            <use xlink:href="assets/svg/leaf.svg#leaf"></use>
+                                        </svg>
+                                    </span>
+                                </div>
+                              
+                                <div class="dashboard-user-name">
+                                    <h6 class="text-content">سلام, <b class="text-title">@user.Name @user.Family</b></h6>
+                                    <p class="text-content">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد.</p>
+                                </div>
+
+                               <br/>
+
+                                <div class="dashboard-title">
+                                    <h3>اطلاعات حساب کاربری</h3>
+                                </div>
+
+                                <div class="row g-4">
+                                    <div class="col-xxl-6">
+                                        <div class="dashboard-contant-title">
+                                            <h4>
+                                                اطلاعات اولیه <a href="javascript:void(0)"
+                                                                 data-bs-toggle="modal" data-bs-target="#editProfile">ویرایش</a>
+                                            </h4>
+                                        </div>
+                                        <div class="dashboard-detail class=col-9">
+                                            <form asp-page="Index" method="post">
+                                                <div style="float:left">
+                                                    <!-- استفاده از تگ 'a' به جای 'button' و اعمال کلاس CSS -->
+                                                    <a href="javascript:void(0)" class="logout-link" onclick="document.getElementById('logout-form').submit();">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" style="weight:30px;height:30px;" viewBox="0 0 24 24">
+                                                            <title>خروج از حساب کاربری</title>
+                                                            <path d="M17 7L15.59 8.41L18.17 11H8V13H18.17L15.59 15.58L17 17L22 12M4 5H12V3H4C2.9 3 2 3.9 2 5V19C2 20.1 2.9 21 4 21H12V19H4V5Z"/>
+                                                        </svg>
+                                                    </a>
+                                                </div>
+                                            </form>
+
+                                            <!-- اضافه کردن 'id' به فرم برای استفاده در جاوااسکریپت -->
+                                            <form id="logout-form" asp-page-handler="LogOut" asp-page="Index" method="post" style="display:none;">
+                                                <input type="hidden"  />
+                                            </form>
+                                            <h5 class="text-content col-9">زینب احمدی</h5>
+                                            <h6 class="text-content col-9">کاربر عادی</h6>
+                                            <h6 class="text-content col-9">email@domain.com</h6>
+                                            <a class="col-9" href="javascript:void(0)">تغییر رمز عبور</a>
+
+                                        </div>
+                                    </div>
+
+                                 
+                                </div>  
+                            </div>
+                        </div>
+                    
+                            <div class="tab-pane fade show" id="pills-profile" role="tabpanel"
+                                 aria-labelledby="pills-profile-tab">
+                        <form>
+                                <div class="dashboard-profile">
+                                    <div class="title">
+                                        <h2>پروفایل من</h2>
+                                        <span class="title-leaf">
+                                            <svg class="icon-width bg-gray">
+                                                <use xlink:href="assets/svg/leaf.svg#leaf"></use>
+                                            </svg>
+                                        </span>
+                                    </div>
+
+                                         
+                                    <div class="profile-detail dashboard-bg-box">
+                                        <div class="dashboard-title">
+                                            <h3>اطلاعات کلی</h3>
+                                        </div>
+                                        <div class="profile-name-detail">
+                                            <div class="d-sm-flex align-items-center d-block">
+                                                <h3>@user.Name @user.Family</h3>
+                                               @*  <div class="product-rating profile-rating">
+                                                    <ul class="rating">
+                                                        <li>
+                                                            <i data-feather="star" class="fill"></i>
+                                                        </li>
+                                                        <li>
+                                                            <i data-feather="star" class="fill"></i>
+                                                        </li>
+                                                        <li>
+                                                            <i data-feather="star" class="fill"></i>
+                                                        </li>
+                                                        <li>
+                                                            <i data-feather="star"></i>
+                                                        </li>
+                                                        <li>
+                                                            <i data-feather="star"></i>
+                                                        </li>
+                                                    </ul>
+                                                </div>  *@
+                                            </div>
+
+                                            <a href="javascript:void(0)" data-bs-toggle="modal"
+                                               data-bs-target="#editProfile">ویرایش</a>
+                                        </div>
+
+                                      
+
+                                        <div class="profile-description">
+                                            <p>
+                                                اقامتگاه ها را می توان بر اساس و نحوه اتصال آنها طبقه بندی کرد
+                                                خانه ها و زمین های همسایه انواع مختلف تصدی مسکن می تواند
+                                                برای همان نوع فیزیکی استفاده شود.
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    <div class="profile-about dashboard-bg-box">
+                                        <div class="row">
+                                            <div class="col-xxl-7">
+                                                <div class="dashboard-title mb-3">
+                                                    <h3>اطلاعات کامل</h3>
+                                                </div>
+
+                                                <div class="table-responsive">
+                                                    <table class="table">
+                                                        <tbody>
+                                                        <tr>
+                                                            <td>نقش ها :</td>
+                                                            
+                                                                @{
+                                                                    if (user.Roles.Count() == 1)
+                                                                    {
+                                                                        foreach (var item in user.Roles)
+                                                                        {
+                                                                            <td> @item.RoleTitle </td>
+                                                                            
+                                                                        }
+                                                                      
+                                                                    }
+                                                                    else
+                                                                    {<td>
+                                                                        @foreach (var item in user.Roles)
+                                                                        {
+                                                                                <p>@item.RoleTitle </p>
+                                                                            
+                                                                        }
+                                                                       </td>
+                                                                    }
+                                                                 }
+                                                           
+                                                        </tr>
+                                                        <tr>
+                                                            <td>نام :</td>
+                                                            <td>@user.Name</td>
+                                                        </tr> 
+                                                        <tr>
+                                                            <td>نام خانوادگی :</td>
+                                                            <td>@user.Family</td>
+                                                        </tr> 
+                                                        <tr>
+                                                            <td>نام کاربری :</td>
+                                                            <td>@user.UserName</td>
+                                                        </tr> 
+                                                        <tr>
+                                                            <td>شماره تماس :</td>
+                                                            <td>
+                                                                <a href="javascript:void(0)"> @user.PhoneNumber</a>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>ایمیل :</td>
+                                                            <td>@user.UserName</td>
+                                                        </tr>
+                                                          
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+
+                                              
+                                            </div>
+
+                                            <div class="col-xxl-5">
+                                                <div class="profile-image">
+                                                    <img src="assets/images/inner-page/dashboard-profile.png"
+                                                         class="img-fluid blur-up lazyload" alt="">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                        </form>
+                            </div>
+
+                        <div class="tab-pane fade show" id="pills-security" role="tabpanel"
+                             aria-labelledby="pills-security-tab">
+                            <div class="dashboard-privacy">
+                                <div class="dashboard-bg-box">
+                                    <div class="dashboard-title mb-4">
+                                        <h3>حریم خصوصی</h3>
+                                    </div>
+
+                                    <div class="privacy-box">
+                                        <div class="d-flex align-items-start">
+                                            <h6>به دیگران اجازه میدهم حساب من را مشاهده کنند.</h6>
+                                            <div class="form-check form-switch switch-radio ms-auto">
+                                                <input class="form-check-input" type="checkbox" role="switch"
+                                                       id="redio1">
+                                                <label class="form-check-label" for="redio1"></label>
+                                            </div>
+                                        </div>
+
+                                        <p class="text-content">همه مردم می توانند پروفایل من را ببینند</p>
+                                    </div>
+
+                                    <div class="privacy-box">
+                                        <div class="d-flex align-items-start">
+                                            <h6>ایمیل من در دیدگاه قابل مشاهده باشد</h6>
+                                            <div class="form-check form-switch switch-radio ms-auto">
+                                                <input class="form-check-input" type="checkbox" role="switch"
+                                                       id="redio2">
+                                                <label class="form-check-label" for="redio2"></label>
+                                            </div>
+                                        </div>
+
+                                        <p class="text-content">با فعال سازی این گزینه به دیگران اجازه میدهید ایمیل شما را مشاهده کنند.</p>
+                                    </div>
+
+                                    <button class="btn theme-bg-color btn-md fw-bold mt-4 text-white">ذخیره تغییرات</button>
+                                </div>
+
+                                <div class="dashboard-bg-box mt-4">
+                                    <div class="dashboard-title mb-4">
+                                        <h3>تنظیمات حساب</h3>
+                                    </div>
+
+                                    <div class="privacy-box">
+                                        <div class="d-flex align-items-start">
+                                            <h6>حساب کاربریم را پس از خارج شدن من حذف کن!!</h6>
+                                            <div class="form-check form-switch switch-radio ms-auto">
+                                                <input class="form-check-input" type="checkbox" role="switch"
+                                                       id="redio3">
+                                                <label class="form-check-label" for="redio3"></label>
+                                            </div>
+                                        </div>
+                                        <p class="text-content">حساب کاربری شما پس از خروج شما حذف خواهد (این فرآیند قابل بازیابی نیست!)</p>
+                                    </div>
+
+                                    <div class="privacy-box">
+                                        <div class="d-flex align-items-start">
+                                            <h6>تصویر پروفایل من را نمایش دهید</h6>
+                                            <div class="form-check form-switch switch-radio ms-auto">
+                                                <input class="form-check-input" type="checkbox" role="switch"
+                                                       id="redio4">
+                                                <label class="form-check-label" for="redio4"></label>
+                                            </div>
+                                        </div>
+
+                                        <p class="text-content">با فعال سازی این گزینه امکان دنلود تصویر پروفایل شما توسط دیگران وجود دارد. لطفا پ از فعال سازی این گرینه از تصویر خود برا پروفایل استفاده نفرمایید.</p>
+                                    </div>
+
+                                    <button class="btn theme-bg-color btn-md fw-bold mt-4 text-white">حذف حساب کاربری</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- User Dashboard Section End -->
+<!-- Footer Section Start -->
+
+<!-- Footer Section End -->
+<!-- Deal Box Modal Start -->
+<div class="modal fade theme-modal deal-modal" id="deal-box" tabindex="-1" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div>
+                    <h5 class="modal-title w-100" id="deal_today">پرفروش ترین های امروز</h5>
+                    <p class="mt-1 text-content">محصولات پیشنهادی برای شما</p>
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="deal-offer-box">
+                    <ul class="deal-offer-list">
+                        <li class="list-1">
+                            <div class="deal-offer-contain">
+                                <a href="shop-left-sidebar.html" class="deal-image">
+                                    <img src="assets/images/vegetable/product/10.png" class="blur-up lazyload"
+                                         alt="">
+                                </a>
+
+                                <a href="shop-left-sidebar.html" class="deal-contain">
+                                    <h5>قهوه فوری مخلوط 50 گرم</h5>
+                                    <h6>52.720 تومان <del>55.720</del> <span>500 گرم</span></h6>
+                                </a>
+                            </div>
+                        </li>
+
+                        <li class="list-2">
+                            <div class="deal-offer-contain">
+                                <a href="shop-left-sidebar.html" class="deal-image">
+                                    <img src="assets/images/vegetable/product/11.png" class="blur-up lazyload"
+                                         alt="">
+                                </a>
+
+                                <a href="shop-left-sidebar.html" class="deal-contain">
+                                    <h5>قهوه فوری مخلوط 50 گرم</h5>
+                                    <h6>52.720 تومان <del>55.720</del> <span>500 گرم</span></h6>
+                                </a>
+                            </div>
+                        </li>
+
+                        <li class="list-3">
+                            <div class="deal-offer-contain">
+                                <a href="shop-left-sidebar.html" class="deal-image">
+                                    <img src="assets/images/vegetable/product/12.png" class="blur-up lazyload"
+                                         alt="">
+                                </a>
+
+                                <a href="shop-left-sidebar.html" class="deal-contain">
+                                    <h5>قهوه فوری مخلوط 50 گرم</h5>
+                                    <h6>52.720 تومان <del>55.720</del> <span>500 گرم</span></h6>
+                                </a>
+                            </div>
+                        </li>
+
+                        <li class="list-1">
+                            <div class="deal-offer-contain">
+                                <a href="shop-left-sidebar.html" class="deal-image">
+                                    <img src="assets/images/vegetable/product/13.png" class="blur-up lazyload"
+                                         alt="">
+                                </a>
+
+                                <a href="shop-left-sidebar.html" class="deal-contain">
+                                    <h5>قهوه فوری مخلوط 50 گرم</h5>
+                                    <h6>52.720 تومان <del>55.720</del> <span>500 گرم</span></h6>
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Deal Box Modal End -->
+<!-- Tap to top start -->
+<div class="theme-option">
+  
+    <div class="back-to-top">
+        <a id="back-to-top" href="#">
+            <i class="fas fa-chevron-up"></i>
+        </a>
+    </div>
+</div>
+<!-- Tap to top end -->
+<!-- Bg overlay Start -->
+<div class="bg-overlay"></div>
+<!-- Bg overlay End -->
+
+<div class="modal fade theme-modal" id="editProfile" tabindex="-1" aria-labelledby="exampleModalLabel2"
+     aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-fullscreen-sm-down">
+        <form method="post" enctype="multipart/form-data">
+
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel2">ویرایش پروفایل</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row g-4">
+ 
+                        <div class="col-xxl-12">
+
+                            <div class="row align-items-center">
+                                <div class="form-floating theme-form-floating">
+                                    <input asp-for="Avatar" class="form-control form-choose" type="file" id="formFileMultiple1" multiple>
+                                    <label for="pname">آواتار </label>
+                                </div>
+                                <span style="visibility:hidden;" asp-validation-for="Avatar"></span>
+
+                            </div>
+
+                        </div><br/>
+
+                        <div class="col-xxl-12">
+
+                            <div class="form-floating theme-form-floating">
+                                <input asp-for="namep" type="text" id="Name" class="form-control" value="@user.Name">
+                                <label for="pname">نام </label>
+                            </div>
+                            <span style="visibility:hidden;" asp-validation-for="namep"></span>
+
+                        </div><br/>
+                     
+                        <div class="col-xxl-12">
+
+                            <div class="form-floating theme-form-floating">
+                                <input asp-for="familyp" type="text" class="form-control" id="Family" value="@user.Family">
+                                <label for="pname">فامیلی </label>
+                            </div>
+                            <span style="visibility:hidden;" asp-validation-for="familyp"></span>
+
+                        </div><br/>
+                        <div class="col-xxl-12">
+
+                            <div class="form-floating theme-form-floating">
+                                <input asp-for="UserNamep" type="text" class="form-control" id="UserName" value="@user.UserName">
+                                <label for="pname">نام کاربری</label>
+                            </div>
+                            <span style="visibility:hidden;" asp-validation-for="UserNamep"></span>
+
+                        </div><br/>
+
+                       
+
+                        <div class="col-xxl-6">
+
+                            <div class="form-floating theme-form-floating">
+                                <input asp-for="PhoneNumberp" class="form-control" type="tel" id="PhoneNumber" value="@user.PhoneNumber"
+                                       maxlength="11" oninput="javascript: if (this.value.length > this.maxLength) this.value =
+                                            this.value.slice(0, this.maxLength);">
+                                <label for="mobile">شماره تماس</label>
+                            </div>
+                            <span style="visibility:hidden;" asp-validation-for="@Model.PhoneNumberp"></span>
+
+                        </div><br/>
+                         
+        
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-animation btn-md fw-bold"
+                            data-bs-dismiss="modal">
+                        بستن
+                    </button>
+                    <button  type="submit" data-bs-dismiss="modal"
+                             class="btn theme-bg-color btn-md fw-bold text-light">
+                        ذخیره تغییرات
+                    </button>
+                </div>
+            </div>
+            </form>
+    </div>
+</div>
+<!-- Edit Profile End -->
+<!-- Edit Card Start -->
+<div class="modal fade theme-modal" id="editCard" tabindex="-1" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-fullscreen-sm-down">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel8">ویرایش حساب</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row g-4">
+                    <div class="col-xxl-6">
+                        <form>
+                            <div class="form-floating theme-form-floating">
+                                <input type="text" class="form-control" id="finame" value="زینب">
+                                <label for="finame">نام</label>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="col-xxl-6">
+                        <form>
+                            <div class="form-floating theme-form-floating">
+                                <input type="text" class="form-control" id="laname" value="احمدی">
+                                <label for="laname">نام خانوادگی</label>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="col-xxl-4">
+                        <form>
+                            <div class="form-floating theme-form-floating">
+                                <select class="form-select" id="floatingSelect12"
+                                        aria-label="Floating label select example">
+                                    <option selected>نام بانک</option>
+                                    <option value="kindom">ملی</option>
+                                    <option value="states">مسکن</option>
+                                    <option value="fra">کشاورزی</option>
+                                    <option value="china">تجارت</option>
+                                    <option value="spain">ملت</option>
+                                </select>
+                                <label for="floatingSelect12">نام بانک</label>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-animation btn-md fw-bold"
+                        data-bs-dismiss="modal">
+                    لغو
+                </button>
+                <button type="button" class="btn theme-bg-color btn-md fw-bold text-light">بروزرسانی حساب</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Edit Card End -->
+<!-- Remove Profile Modal Start -->
+<div class="modal fade theme-modal remove-profile" id="removeProfile" tabindex="-1"
+     aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
+        <div class="modal-content">
+            <div class="modal-header d-block text-center">
+                <h5 class="modal-title w-100" id="exampleModalLabel22">هشدار</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="remove-box">
+                    <p>پس از حذف حساب امکان بازگردانی حساب وجود ندارد. آیا ادامه میدهید ؟</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-animation btn-md fw-bold" data-bs-dismiss="modal">نه</button>
+                <button type="button" class="btn theme-bg-color btn-md fw-bold text-light"
+                        data-bs-target="#removeAddress" data-bs-toggle="modal">
+                    بله
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade theme-modal remove-profile" id="removeAddress" tabindex="-1"
+     aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-center" id="exampleModalLabel12">تمام!</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="remove-box text-center">
+                    <h4 class="text-content">حساب با موفقیت حذف شد.</h4>
+                </div>
+            </div>
+            <div class="modal-footer pt-0">
+                <button type="button" class="btn theme-bg-color btn-md fw-bold text-light"
+                        data-bs-dismiss="modal">
+                    بستن
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+@*    <script>
+        class User{
+             name = "";
+             family = "";
+             userName = "";
+             email = "";
+             phoneNumber;
+        }
+        function EditUser(){
+            var a = new User();
+            a.name = $(#"Name").val();
+            a.family = $(#"Family").val();
+            a.userName = $(#"UserName").val();
+            a.email = $(#"Email").val();
+            a.phoneNumber = $(#"PhoneNumber").val();
+            UpdateItem("",a)
+        }
+    </script>*@
+
+    <script src="~/assets/js/jquery-3.6.0.min.js"></script>
+    <script src="~/assets/js/jquery-ui.min.js"></script>
+    <script src="~/assets/js/bootstrap/bootstrap.bundle.min.js"></script>
+    <script src="~/assets/js/bootstrap/bootstrap-notify.min.js"></script>
+    <script src="~/assets/js/bootstrap/popper.min.js"></script>
+    <script src="~/assets/js/feather/feather.min.js"></script>
+    <script src="~/assets/js/feather/feather-icon.js"></script>
+    <script src="~/assets/js/lazysizes.min.js"></script>
+    <script src="~/assets/js/wizard.js"></script>
+    <script src="~/assets/js/slick/slick.js"></script>
+    <script src="~/assets/js/slick/custom_slick.js"></script>
+    <script src="~/assets/js/quantity-2.js"></script>
+    <script src="~/assets/js/script.js"></script>
+    <script src="~/assets/js/theme-setting.js"></script>
+}

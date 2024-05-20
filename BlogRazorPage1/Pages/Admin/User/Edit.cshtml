@@ -1,0 +1,166 @@
+﻿@page 
+@inject IUserService UserService
+@using BlogRazorPage.Services.User
+@using BlogRazorPage.Models.User
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model BlogRazorPage.Pages.Admin.User.EditModel
+@{
+    Layout = "Shared/AdminLayout/_AdminLayout";
+    ViewData["Title"] = "SetRole";
+}
+@{
+  
+}
+@* @section Header
+{
+    <link id="rtl-link" rel="stylesheet" type="text/css" href="~/assets/css/vendors/bootstrap.css">
+    <link id="rtl-link" rel="stylesheet" type="text/css" href="~/assets/css/vendors/bootstrap.rtl.css">
+    <link rel="stylesheet" href="assets/css/animate.min.css" />
+    <link rel="stylesheet" type="text/css" href="~/assets/css/vendors/font-awesome.css">
+    <link rel="stylesheet" type="text/css" href="~/assets/css/vendors/feather-icon.css">
+    <link rel="stylesheet" type="text/css" href="~/assets/css/vendors/slick/slick.css">
+    <link rel="stylesheet" type="text/css" href="~/assets/css/vendors/slick/slick-theme.css">
+    <link rel="stylesheet" type="text/css" href="~/assets/css/bulk-style.css">
+    <link id="color-link" rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <link rel="stylesheet" href="~/assets/css/custom.css">
+    <link rel="stylesheet" href="~/assets/css/font.css">
+
+} *@
+
+<br/><br/>
+
+        <div class="page-body">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="card card-table">
+                            <div class="card-body">
+                                <main class="page-content">
+                                    <div class="container">
+
+                                        <div class="modal-dialog modal-lg modal-dialog-centered modal-fullscreen-sm-down">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel8">ویرایش حساب</h5>
+                                                  
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form method="post" enctype="multipart/form-data">
+
+                                                        <div class="modal-content">
+                                                           
+                                                            <div class="modal-body">
+                                                                <div class="row g-4">
+
+                                                                    <div class="col-xxl-12">
+
+                                                                        <div class="row align-items-center">
+                                                                            <div class="form-floating theme-form-floating">
+                                                                                <input asp-for="Avatar"  class="form-control form-choose" type="file" id="formFileMultiple1" multiple>
+                                                                                <label for="pname">نام </label>
+                                                                            </div>
+                                                                            <span style="visibility:hidden;"  asp-validation-for="Avatar" ></span>
+
+                                                                        </div>
+
+                                                                    </div><br />
+
+                                                                    <div class="col-xxl-12">
+
+                                                                        <div class="form-floating theme-form-floating">
+                                                                            <input  asp-for="namep"  type="text" id="Name" class="form-control" value="@Model.namep">
+                                                                            <label for="pname">نام </label>
+                                                                        </div>
+                                                                        <span style="visibility:hidden;"  asp-validation-for="namep" ></span>
+
+                                                                    </div><br />
+
+                                                                    <div class="col-xxl-12">
+
+                                                                        <div class="form-floating theme-form-floating">
+                                                                            <input asp-for="familyp"  type="text" class="form-control" id="Family" value="@Model.familyp">
+                                                                            <label for="pname">فامیلی </label>
+                                                                        </div>
+                                                                        <span style="visibility:hidden;" asp-validation-for="familyp" ></span>
+
+                                                                    </div><br />
+                                                                    <div class="col-xxl-12">
+
+                                                                        <div class="form-floating theme-form-floating">
+                                                                            <input asp-for="UserNamep" type="text" class="form-control" id="UserName" value="@Model.UserNamep">
+                                                                            <label for="pname">نام کاربری</label>
+                                                                        </div>
+                                                                        <span style="visibility:hidden;" asp-validation-for="UserNamep" ></span>
+
+                                                                    </div><br />
+                                                                   @*  @Html.EditorFor(m=>m.UserNamep) *@
+
+                                                                    <div class="col-xxl-6">
+
+                                                                        <div class="form-floating theme-form-floating">
+                                                                            <input asp-for="PhoneNumberp"  class="form-control" type="tel" value="@Model.PhoneNumberp" id="PhoneNumber"
+                                                                                   maxlength="11" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
+                                                                            <label for="mobile">شماره تماس</label>
+                                                                        </div>
+                                                                        <span style="visibility:hidden;"  asp-validation-for="@Model.PhoneNumberp" ></span>
+
+                                                                    </div><br />
+                                                                    <div hidden class="col-xxl-6">
+
+                                                                        <div class="form-floating theme-form-floating">
+                                                                            <input asp-for="Id"  class="form-control" type="tel" value="@Model.Id" id="id">
+                                                                            <label for="id"></label>
+                                                                        </div>
+                                                                        
+
+                                                                    </div><br />
+
+
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-animation btn-md fw-bold"
+                                                                        data-bs-dismiss="modal">
+                                                                    بستن
+                                                                </button>
+                                                                <button type="submit" data-bs-dismiss="modal"
+                                                                        class="btn theme-bg-color btn-md fw-bold text-light">
+                                                                    ذخیره تغییرات
+                                                                </button>
+                                                                @* <submit/> *@
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                               
+                                            </div>
+                                        </div>
+                                    </div>
+                                </main>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+@section Scripts {
+   
+    <script src="~/assets/js/jquery-3.6.0.min.js"></script>
+    <script src="~/assets/js/jquery-ui.min.js"></script>
+    <script src="~/assets/js/bootstrap/bootstrap.bundle.min.js"></script>
+    <script src="~/assets/js/bootstrap/bootstrap-notify.min.js"></script>
+    <script src="~/assets/js/bootstrap/popper.min.js"></script>
+    <script src="~/assets/js/feather/feather.min.js"></script>
+    <script src="~/assets/js/feather/feather-icon.js"></script>
+    <script src="~/assets/js/lazysizes.min.js"></script>
+    <script src="~/assets/js/slick/slick.js"></script>
+    <script src="~/assets/js/slick/slick-animation.min.js"></script>
+    <script src="~/assets/js/slick/custom_slick.js"></script>
+    <script src="~/assets/js/wow.min.js"></script>
+    <script src="~/assets/js/custom-wow.js"></script>
+    <script src="~/assets/js/script.js"></script>
+    <script src="~/assets/js/theme-setting.js"></script>
+}

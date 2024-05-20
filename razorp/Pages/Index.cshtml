@@ -1,0 +1,26 @@
+﻿@page
+@model IndexModel
+@{
+    Layout = "Shared/_Layout";
+
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <div class="col-md-12">
+        @Html.EditorFor(s=>s.s)
+    </div>
+</div>
+
+@Html.TextArea("content", new { @id = "editor1" })
+<input type="submit" value="Submit" />
+    
+@section Scripts
+{
+    <script type="text/javascript" src="~/Scripts/ckeditor/ckeditor.js"></script>
+    <script>
+    CKEDITOR.replace('editor1');
+</script>
+}

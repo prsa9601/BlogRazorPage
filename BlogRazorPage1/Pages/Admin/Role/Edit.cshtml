@@ -1,0 +1,71 @@
+﻿@page
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using BlogRazorPage.Infrastructure
+@using BlogRazorPage.TagHelpers
+@model BlogRazorPage.Pages.Admin.Role.EditModel
+@{
+    Layout = "Shared/AdminLayout/_AdminLayout";
+    ViewData["Title"] = "ویرایش نقش ";
+    ViewData["selected"] = "roles";
+}
+@section Header
+    {
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+}
+
+        <div class="page-body">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="card card-table">
+                            <div class="card-body">
+                                <form class="card" method="post">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                @Html.EditorFor(f=>f.Title)
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label>انتخاب دسترسی ها</label>
+                                                <div class="row">
+                                                    @foreach (var item in Enum.GetNames(typeof(Permission)))
+                                                    {
+                                                        var id = Guid.NewGuid();
+
+                                                   @*     <div class="col-md-4">
+                                                            <div class="custom-control custom-switch custom-switch-success mr-2 mb-1">
+                                                                <label class="mb-0 d-block">@item.Replace("_"," ")</label>
+                                                                <input type="checkbox" value="@item" checked="@(Model.Permissions.Any(f=>f.ToString()==item))" class="custom-control-input" name="permissions" id="@id">
+                                                                <label class="custom-control-label" for="@id">
+                                                                    <span class="switch-icon-left"><i class="bx bx-check"></i></span>
+                                                                    <span class="switch-icon-right"><i class="bx bx-check"></i></span>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+*@
+                                                        <div class="form-check form-switch mb-2">
+                                                            <input name="permissions" class="form-check-input" type="checkbox" id="@id" value="@item" checked="@(Model.Permissions.Any(f=>f.ToString()==item))">
+                                                            <label class="form-check-label" for="@id">@item.Replace("_"," ")</label>
+                                                        </div>
+                                                    }
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+         
+                                    
+                                    <div class="card-footer text-left">
+                                        <cancel></cancel>
+                                        <submit />
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+  

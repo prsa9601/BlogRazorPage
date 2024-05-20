@@ -1,0 +1,205 @@
+﻿@page
+@using BlogRazorPage.Models.Category
+@using BlogRazorPage.Services.Category
+@inject ICategoryService _service
+@model BlogRazorPage.Pages.Admin.Blog.AddModel
+@{
+    Layout = "Shared/AdminLayout/_AdminLayout";
+    ViewData["Title"]="افزودن بلاگ";
+}
+@{
+    var CategoryDtos = await _service.GetCategories();
+}
+
+@section Header
+    {
+    <script src="../../../../ckeditor/ckeditor.js"></script>
+    <script src="../../Custom.js"></script>
+    
+    
+    
+  
+    }
+
+
+
+
+<div class="page-body">
+
+    <!-- New Product Add Start -->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-sm-8 m-auto">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="card-header-2">
+                                    <h5>ایجاد بلاگ جدید</h5>
+                                </div>
+
+                                <form class="theme-form theme-form-2 mega-form" method="post" enctype="multipart/form-data" >
+                                    <div class="mb-4 row align-items-center">
+                                        <label class="form-label-title col-sm-3 mb-0">نام بلاگ</label>
+                                        <div class="col-sm-9">
+                                            <input asp-for="Title" class="form-control" type="text"
+                                                   placeholder="عنوان بلاگ">
+                                        </div>
+                                                    <span asp-validation-for="@Model.Title"></span>
+
+                                    </div>
+
+                                    <div class="mb-4 row align-items-center">
+                                        <label asp-for="CategoryId" class="col-sm-3 col-form-label form-label-title">دسته بندی</label>
+                                        <div class="col-sm-9">
+                                              <select asp-for="CategoryId" class="js-example-basic-single w-100">
+                                                          <option value="null" disabled="true">انتخاب کنید</option>
+
+                                                 @foreach (var title in CategoryDtos)
+                                                 {
+                                                          <option value="@title.Id">@title.Title</option>
+                                                 }
+                                                  
+                                                
+                                               
+                                            </select>
+                                        </div>
+                                        <span asp-validation-for="@Model.CategoryId"></span>
+
+                                    </div>
+
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="row">
+                                                    <label class="form-label-title col-sm-3 mb-0">توضیحات محصول</label>
+                                                    <div class="col-md-12">
+                                                        @Html.EditorFor(s=>s.Description)
+                                                    </div>
+                                                    <span asp-validation-for="@Model.Description"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br/>
+                                                
+                                    <div class="row align-items-center">
+                                        <label asp-for="@Model.Image" class="col-sm-3 col-form-label form-label-title"></label>
+                                        <div class="col-sm-9">
+                                            <input asp-for="Image" class="form-control form-choose" type="file" id="formFileMultiple1" multiple>
+                                        </div>
+                                       @* <span asp-validation-for="@Model.Image"></span>*@
+
+                                    </div>
+                     
+                                   
+                                    <br/><br/>
+                                <div class="card-header-2">
+                                    <h5>سئو و موتور جستجو</h5>
+                                </div>
+                                
+                                    <div class="col-12">
+                                        <label asp-for="MetaDescription" class="form-label" for="bootstrap-maxlength-example2">ناحیه متنی</label>
+                                        <textarea asp-for="MetaDescription" id="bootstrap-maxlength-example2" class="form-control bootstrap-maxlength-example" rows="3" placeholder="تا 200 حرف راجب بلاگتون توضیح دهید." maxlength="200"></textarea>
+                                    </div>
+                                    <span asp-validation-for="@Model.MetaDescription"></span>
+
+
+                                    <br/>
+                                    <div class="mb-4 row align-items-center">
+                                        <label asp-for="Slug" class="form-label-title col-sm-3 mb-0"></label>
+                                        <div class="col-sm-9">
+                                            <input asp-for="@Model.Slug" class="form-control" type="search">
+                                        </div>
+                                        <span asp-validation-for="@Model.Slug"></span>
+                                             
+                                    </div>
+
+                                  @*  <div class="mb-4 row">
+                                        <label class="form-label-title col-sm-3 mb-0" asp-for="MetaTag"></label>
+                                        <div class="col-sm-9">
+                                            <textarea class="form-control" asp-for="MetaTag" rows="3"></textarea>
+                                        </div>
+                                        <span asp-validation-for="@Model.MetaTag"></span>
+
+                                    </div>
+
+                                    <div class="mb-4 row">
+                                        <label class="form-label-title col-sm-3 mb-0" asp-for="MetaDescription"></label>
+                                        <div class="col-sm-9">
+                                            <textarea class="form-control" asp-for="@Model.MetaDescription" rows="3"></textarea>
+                                        </div>
+                                        <span asp-validation-for="@Model.MetaDescription"></span>
+                                    
+                                    </div>*@
+                                                <button class="btn btn-animation btn-md fw-bold ms-auto" >افزودن بلاگ</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- New Product Add End -->
+    <!-- footer Start -->
+    <div class="container-fluid">
+        <footer class="footer">
+            <div class="row">
+                <div class="col-md-12 footer-copyright text-center">
+                    <p class="mb-0">راست چین شده توسط : امین احمدی</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <!-- footer En -->
+</div>
+<!-- Container-fluid End -->
+
+<!-- Modal End -->
+
+@section Scripts
+{
+    
+
+    
+        <script src="//cdn.ckeditor.com/4.24.0-lts/full/ckeditor.js"></script>
+
+        <script>
+            $(document).ready(function () {
+                //console.log("1");
+                CKEDITOR.replace('ckEditor4', {
+
+                    licenseKey: "GNU General Public License(GPL) Version 2",
+
+                    customConfig: '../../../../config.js',
+                    //              language: 'fa',
+                    //ckfinder: { uploadUrl: '/index/Upload' }
+                });
+            });
+
+        </script>
+      
+        
+        <script src="../../assets/js/forms-extras.js"></script>
+
+        <script src="~/AdminAssets/assets/vendor/libs/jquery/jquery.js"></script>
+        <script src="~/AdminAssets/assets/vendor/libs/popper/popper.js"></script>
+        <script src="~/AdminAssets/assets/vendor/js/bootstrap.js"></script>
+        <script src="~/AdminAssets/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+        <script src="~/AdminAssets/assets/vendor/libs/node-waves/node-waves.js"></script>
+        <script src="~/AdminAssets/assets/vendor/libs/hammer/hammer.js"></script>
+        <script src="~/AdminAssets/assets/vendor/libs/i18n/i18n.js"></script>
+        <script src="~/AdminAssets/assets/vendor/libs/typeahead-js/typeahead.js"></script>
+        <script src="~/AdminAssets/assets/vendor/js/menu.js"></script>
+        <script src="~/AdminAssets/assets/vendor/libs/autosize/autosize.js"></script>
+        <script src="~/AdminAssets/assets/vendor/libs/cleavejs/cleave.js"></script>
+        <script src="~/AdminAssets/assets/vendor/libs/cleavejs/cleave-phone.js"></script>
+        <script src="~/AdminAssets/assets/vendor/libs/bootstrap-maxlength/bootstrap-maxlength.js"></script>
+        <script src="~/AdminAssets/assets/vendor/libs/jquery-repeater/jquery-repeater.js"></script>
+        <script src="~/AdminAssets/assets/js/main.js"></script>
+
+}
+
+
+

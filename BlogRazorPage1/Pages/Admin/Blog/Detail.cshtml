@@ -1,0 +1,210 @@
+﻿@page
+@using BlogRazorPage.Infrastructure
+@model BlogRazorPage.Pages.Admin.Blog.DetailModel
+@{
+    Layout = "Shared/AdminLayout/_AdminLayout";
+    ViewData["Title"] = "Index";
+}
+@section Header{
+    <link id="rtl-link" rel="stylesheet" type="text/css" href="~/assets/css/vendors/bootstrap.css">
+    <link id="rtl-link" rel="stylesheet" type="text/css" href="~/assets/css/vendors/bootstrap.rtl.css">
+    <link rel="stylesheet" href="assets/css/animate.min.css" />
+    <link rel="stylesheet" type="text/css" href="~/assets/css/vendors/font-awesome.css">
+    <link rel="stylesheet" type="text/css" href="~/assets/css/vendors/feather-icon.css">
+    <link rel="stylesheet" type="text/css" href="~/assets/css/vendors/slick/slick.css">
+    <link rel="stylesheet" type="text/css" href="~/assets/css/vendors/slick/slick-theme.css">
+    <link rel="stylesheet" type="text/css" href="~/assets/css/bulk-style.css">
+    <link id="color-link" rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <link rel="stylesheet" href="~/assets/css/custom.css">
+    <link rel="stylesheet" href="~/assets/css/font.css">
+}
+
+
+                <div class="page-body">
+
+                    <!-- New Product Add Start -->
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="row">
+                                    <div class="col-sm-12 m-auto">
+<section class="blog-section section-b-space">
+    <div class="container-fluid-lg">
+                                            <div class="row g-sm-4 g-3">
+            <div class="col-xxl-12 col-xl-12 col-lg-12 ratio_50">
+                <div class="blog-detail-image rounded-3 mb-4 bg-size blur-up lazyloaded" style="background-image: url(&quot;assets/images/inner-page/blog/1.jpg&quot;); background-size: cover; background-position: center center; background-repeat: no-repeat; display: block;">
+                    <img src="@Directories.GetProductImage(Model.post.ImageName)" class="bg-img blur-up lazyloaded" alt="" style="display: none;">
+                    <div class="blog-image-contain">
+                       @*  <ul class="contain-list">
+                            <li>کوله پشتی</li>
+                            <li>سبک زندگی</li>
+                            <li>ارگانیک</li>
+                        </ul> *@
+                        <h2> @Model.post.Title</h2>
+                        <ul class="contain-comment-list">
+                            <li>
+                                <div class="user-list">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                                    <span>@Model.post.UserFullName</span>
+                                </div>
+                            </li>
+
+                            <li>
+                                <div class="user-list">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                                    <span>@Model.post.CreationDate</span>
+                                </div>
+                            </li>
+
+                            <li>
+                                <div class="user-list">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-message-square"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+                                    <span>@Model.post.Visit دیدگاه</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div @* @Model.post.Description *@>
+                    @Html.Raw(@Model.post.Description)
+                </div>
+
+                <div class="comment-box overflow-hidden">
+                    <div class="leave-title">
+                        <h3>دیدگاه ها</h3>
+                    </div>
+
+
+                    <div class="user-comment-box">
+                        <ul>
+                            @{
+                                foreach (var comment in Model.commentResult.Data)
+                                {
+                                    <li>
+                                        <div class="user-box border-color">
+                                            <div class="user-iamge">
+                                                <img src="@Directories.GetAvatar(comment.userAvatar)" class="img-fluid blur-up lazyloaded" alt="">
+                                                <div class="user-name">
+                                                    <h6>@comment.CreationDate</h6>
+                                                    <h5 class="text-content">@comment.UserName</h5>
+                                                </div>
+                                            </div>
+
+                                            <div class="user-contain">
+                                                <p>@comment.Text</p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                }
+
+                            }
+
+
+                        </ul>
+                    </div>
+                    <form method="get">
+                        @{
+                            var id = @Model.post .Id;
+                        }
+                        <nav class="custome-pagination">
+                            <ul class="pagination justify-content-center">
+
+                                @if (Model.commentResult.CurrentPage == 1)
+                                {
+
+                                    <li class="page-item disabled">
+                                        <a class="page-link prev" onclick="changeCommentPage('@(Model.commentResult.CurrentPage - 1)')" href="javascript:void(0)" tabindex="-1" aria-disabled="true">
+                                            <i class="fa-solid fa-angles-right"></i>
+                                        </a>
+                                    </li>
+                                }
+
+
+
+                                @if (Model.commentResult.CurrentPage > 1)
+                                {
+                                    int prevpage = Model.commentResult.CurrentPage - 1;
+                                    <li class="page-item">
+                                        <a class="page-link prev" onclick="changeCommentPage('@(Model.commentResult.CurrentPage - 1)')" href="?id=@id&pageId=@prevpage&take=6" tabindex="-1" aria-disabled="true">
+                                            <i class="fa-solid fa-angles-right"></i>
+                                        </a>
+                                    </li>
+                                }
+
+
+                                @for (var i = Model.commentResult.StartPage; i <= Model.commentResult.EndPage; i++)
+                                {
+
+                                    @if (i == Model.commentResult.CurrentPage)
+                                    {
+                                        <li class="page-item active">
+                                            <a class="page-link current" href="javascript:void(0)">@i</a>
+                                        </li>
+                                    }
+                                    else
+                                    {
+                                        <li class="page-item" aria-current="page">
+                                            <a class="page-link " onclick="changeCommentPage('@i')" href="?id=@id&pageId=@i&take=6">@i</a>
+                                        </li>
+                                    }
+
+                                }
+
+
+                                @{
+                                    int nextpage = Model.commentResult.CurrentPage + 1;
+                                    @if (Model.commentResult.CurrentPage != Model.commentResult.EndPage)
+                                    {
+                                        <li class="page-item">
+                                            <a class="page-link next" onclick="changeCommentPage('@(Model.commentResult.CurrentPage + 1)')" href="?id=@id&pageId=@nextpage&take=6" tabindex="+1" aria-disabled="true">
+                                                <i class="fa-solid fa-angles-left"></i>
+                                            </a>
+                                        </li>
+                                    }
+                                    else
+                                    {
+                                        <li class="page-item disabled">
+                                            <a class="page-link next" onclick="changeCommentPage('@(Model.commentResult.CurrentPage + 1)')" href="?id=@id&pageId=@nextpage&take=6" tabindex="+1" aria-disabled="true">
+                                                <i class="fa-solid fa-angles-left"></i>
+                                            </a>
+                                        </li>
+                                    }
+
+                                }
+                            </ul>
+                        </nav>
+                    </form>
+                </div>
+     
+        </div>
+    </div>
+                                    </section>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+<!-- Container-fluid End -->
+
+
+@section Scripts{
+        <script src="../../assets/js/forms-extras.js"></script>
+  <script src="~/assets/js/jquery-3.6.0.min.js"></script>
+    <script src="~/assets/js/jquery-ui.min.js"></script>
+    <script src="~/assets/js/bootstrap/bootstrap.bundle.min.js"></script>
+    <script src="~/assets/js/bootstrap/bootstrap-notify.min.js"></script>
+    <script src="~/assets/js/bootstrap/popper.min.js"></script>
+    <script src="~/assets/js/feather/feather.min.js"></script>
+    <script src="~/assets/js/feather/feather-icon.js"></script>
+    <script src="~/assets/js/lazysizes.min.js"></script>
+    <script src="~/assets/js/slick/slick.js"></script>
+    <script src="~/assets/js/slick/slick-animation.min.js"></script>
+    <script src="~/assets/js/slick/custom_slick.js"></script>
+    <script src="~/assets/js/wow.min.js"></script>
+    <script src="~/assets/js/custom-wow.js"></script>
+    <script src="~/assets/js/script.js"></script>
+    <script src="~/assets/js/theme-setting.js"></script>
+}

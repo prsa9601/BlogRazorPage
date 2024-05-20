@@ -1,0 +1,189 @@
+﻿<!DOCTYPE html>
+
+<html lang="fa" dir="rtl">
+<head>
+    <partial name="Shared/AdminLayout/AdminPartials/_Head" />
+
+    @await RenderSectionAsync("Header", required: false)
+
+</head>
+<body>
+    <div class="page-wrapper compact-wrapper" id="pageWrapper">
+
+        <partial name="Shared/AdminLayout/AdminPartials/_Header" />
+
+     
+            <!-- tap on top start -->
+            <div class="tap-top">
+                <span class="lnr lnr-chevron-up"></span>
+            </div>
+            <!-- tap on tap end -->
+            <!-- page-wrapper start -->
+            <div>
+                <!-- Page Header Start-->
+                <!-- Page Header Ends-->
+                <!-- Page Body start -->
+                <div class="page-body-wrapper">
+                    <!-- Page Sidebar Start-->
+                    <div class="sidebar-wrapper">
+                        <div id="sidebarEffect"></div>
+                        <div>
+                            <div class="logo-wrapper logo-wrapper-center">
+                                <a href="index.html" data-bs-original-title="" title="">
+                                    <img class="img-fluid for-white" src="~/AdminAssets/assets/images/logo/full-white.png" alt="logo">
+                                </a>
+                                <div class="back-btn">
+                                    <i class="fa fa-angle-left"></i>
+                                </div>
+                                <div class="toggle-sidebar">
+                                    <i class="ri-apps-line status_toggle middle sidebar-toggle"></i>
+                                </div>
+                            </div>
+                            <div class="logo-icon-wrapper">
+                                <a href="index.html">
+                                    <img class="img-fluid main-logo main-white" src="~/AdminAssets/assets/images/logo/1-white.png" alt="logo">
+                                    <img class="img-fluid main-logo main-dark" src="~/AdminAssets/assets/images/logo/logo-white.png"
+                                         alt="logo">
+                                </a>
+                            </div>
+                            <nav class="sidebar-main">
+                                <div class="left-arrow" id="left-arrow">
+                                    <i data-feather="arrow-left"></i>
+                                </div>
+
+                                <div id="sidebar-menu">
+                                    <ul class="sidebar-links" id="simple-bar">
+                                        <li class="back-btn"></li>
+
+                                        <li class="sidebar-list">
+                                            <a class="sidebar-link sidebar-title link-nav" href="index.html">
+                                                <i class="ri-home-line"></i>
+                                                <span>پیشخوان</span>
+                                            </a>
+                                        </li>
+
+                                        <li class="sidebar-list">
+                                            <a class="linear-icon-link sidebar-link sidebar-title" href="javascript:void(0)">
+                                                <i class="ri-store-3-line"></i>
+                                                <span>محصولات</span>
+                                            </a>
+                                            <ul class="sidebar-submenu">
+                                                <li>
+                                                    <a href="products.html">محصولات</a>
+                                                </li>
+
+                                                <li>
+                                                    <a href="add-new-product.html">افزودن بلاگ جدید</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+
+                                        <li class="sidebar-list">
+                                            <a class="linear-icon-link sidebar-link sidebar-title" href="javascript:void(0)">
+                                                <i class="ri-list-check-2"></i>
+                                                <span>دسته بندی</span>
+                                            </a>
+                                            <ul class="sidebar-submenu">
+                                                <li>
+                                                    <a href="category.html">لیست دسته ها</a>
+                                                </li>
+
+                                                <li>
+                                                    <a href="add-new-category.html">افزودن دسته جدید</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+
+                                        <li class="sidebar-list">
+                                            <a class="linear-icon-link sidebar-link sidebar-title" href="javascript:void(0)">
+                                                <i class="ri-list-settings-line"></i>
+                                                <span>ویژگی ها</span>
+                                            </a>
+                                            <ul class="sidebar-submenu">
+                                                <li>
+                                                    <a href="attributes.html">ویژگی ها</a>
+                                                </li>
+
+                                                <li>
+                                                    <a href="add-new-attributes.html">افزودن جدید</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+
+                                        <li class="sidebar-list">
+                                            <a class="sidebar-link sidebar-title" href="javascript:void(0)">
+                                                <i class="ri-user-3-line"></i>
+                                                <span>کاربران</span>
+                                            </a>
+                                            <ul class="sidebar-submenu">
+                                                <li>
+                                                    <a href="all-users.html">نمایش کاربران</a>
+                                                </li>
+                                                <li>
+                                                    <a href="add-new-user.html">افزودن کاربر جدید</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+
+                                        <li class="sidebar-list">
+                                            <a class="sidebar-link sidebar-title" href="javascript:void(0)">
+                                                <i class="ri-user-3-line"></i>
+                                                <span>نقش ها</span>
+                                            </a>
+                                            <ul class="sidebar-submenu">
+                                                <li>
+                                                    <a href="role.html">تمام نقش ها</a>
+                                                </li>
+                                                <li>
+                                                    <a href="create-role.html">افزودن نقش جدید</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+
+                                    </ul>
+                                </div>
+
+                                <div class="right-arrow" id="right-arrow">
+                                    <i data-feather="arrow-right"></i>
+                                </div>
+                            </nav>
+                        </div>
+                    </div>
+
+    @RenderBody()
+            </div>
+            <!-- Page Body End -->
+        </div>
+        <!-- page-wrapper End -->
+        <!-- Modal Start -->
+        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+             aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog  modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <h5 class="modal-title" id="staticBackdropLabel">خروج</h5>
+                        <p>آیا برای خارج شدن مطمئن هستید؟</p>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+                        <div class="button-box">
+                            <button type="button" class="btn btn--no" data-bs-dismiss="modal">خیر</button>
+                            <button type="button" class="btn  btn--yes btn-primary">بله</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <partial name="Shared/AdminLayout/AdminPartials/_footer" />
+        
+        <div id="ajax-token">@Html.AntiForgeryToken()</div>
+
+    </div>
+
+    <div id="ajax-token">@Html.AntiForgeryToken()</div>
+
+<partial name="Shared/AdminLayout/AdminPartials/_Scripts" />
+
+@await RenderSectionAsync("Scripts", required: false)
+
+</body>
+<html/>

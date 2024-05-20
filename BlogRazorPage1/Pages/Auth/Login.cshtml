@@ -1,0 +1,53 @@
+﻿@page
+@model BlogRazorPage.Pages.Auth.LoginModel
+@{
+    Layout = "Shared/Auth/_AuthLayout";
+    ViewData["Title"] = "ورود";
+}
+<!-- log in section start -->
+
+<section class="log-in-section background-image-2 section-b-space">
+    <div class="container-fluid-lg w-100">
+        <div class="row">
+            <div class="col-xxl-6 col-xl-5 col-lg-6 d-lg-block d-none ms-auto">
+                <div class="image-contain">
+                    <img src="~/assets/images/inner-page/log-in.png" class="img-fluid" alt="">
+                </div>
+            </div>
+
+            <div class="col-xxl-4 col-xl-5 col-lg-6 me-auto">
+                <div class="log-in-box">
+                    <div class="log-in-title">
+                        <h3>به سایت پاکراه خوش آمدید</h3>
+                        <h4>ورود به حساب کاربری</h4>
+                    </div>
+                    <br/>
+                    <br/>
+                    <div class="input-box">
+                        <form method="post" class="row g-4">
+
+                            @Html.HiddenFor(f=>f.RedirectTo)
+                            @Html.EditorFor(m => m.PhoneNumber)
+                            @Html.EditorFor(m => m.Password)
+
+                            <div class="col-12">
+                                <button class="btn btn-animation w-100 justify-content-center" >ورود</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="other-log-in">
+                        <h6></h6>
+                    </div>
+
+                    <div class="sign-up-box">
+                        <h4>حساب کاربری ندارید ؟</h4>
+                        <a asp-page="../Auth/Register">ثبت نام کنید</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- log in section end -->

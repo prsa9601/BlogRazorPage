@@ -1,0 +1,29 @@
+﻿<!DOCTYPE html>
+
+<html lang="fa" dir="rtl">
+<head>
+    <partial name="Shared/Front/FrontLayout/FrontPartials/_Head" />
+
+    @await RenderSectionAsync("Header", required: false)
+
+</head>
+<body>
+    <div class="page-wrapper compact-wrapper" id="pageWrapper">
+
+        <partial name="Shared/Front/FrontLayout/FrontPartials/_Header" />
+
+    @RenderBody()
+
+        <partial name="Shared/Front/FrontLayout/FrontPartials/_footer" />
+        
+        <div id="ajax-token">@Html.AntiForgeryToken()</div>
+
+    </div>
+
+
+    <partial name="Shared/Front/FrontLayout/FrontPartials/_Scripts" />
+
+@await RenderSectionAsync("Scripts", required: false)
+
+</body>
+<html/>

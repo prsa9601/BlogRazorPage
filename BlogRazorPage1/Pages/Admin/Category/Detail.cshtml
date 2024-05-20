@@ -1,0 +1,73 @@
+﻿@page
+@model BlogRazorPage.Pages.Admin.Category.DetailModel
+@{ 
+    Layout = "Shared/AdminLayout/_AdminLayout";
+      ViewData["Title"]="DetailCategory";
+}
+
+
+
+<div class="page-body">
+
+    <!-- New Product Add Start -->
+    <div class="card">
+        <div class="card-body">
+            <div class="card-header-2">
+                <h5>دسته بندی</h5>
+            </div>
+
+            <form class="theme-form theme-form-2 mega-form" method="post">
+                <div class="mb-4 row align-items-center">
+                    <label for="Title" class="form-label-title col-sm-3 mb-0">Slug</label>
+                    <div class="col-sm-9">
+                        <input class="form-control" id="Title" type="text" value="@Model.category.Title" disabled>
+                    </div>
+                   
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="card-header-2">
+                            <h5>سئو و موتور جستجو</h5>
+                        </div>
+
+                        <div class="seo-view">
+                            <span class="link">https://farscod.ir</span>
+                            <h5>فلش 64 گیگ sandisk با گارانتی 18 ماهه متین</h5>
+                            <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. </p>
+                        </div>
+
+                        <div class="mb-4 row align-items-center">
+                            <label for="Slug"  class="form-label-title col-sm-3 mb-0">Slug</label>
+                            <div class="col-sm-9">
+                                <input id="Slug" disabled value="@Model.category.Slug" class="form-control" type="search">
+                            </div>
+                     
+
+                        </div>
+
+                        <div class="mb-4 row">
+                            <label class="form-label-title col-sm-3 mb-0" for="MetaTag">MetaTag</label>
+                            <div class="col-sm-9">
+                                <textarea class="form-control" id="MetaTag" rows="3" disabled aria-valuenow="@Model.category.MetaTag">@Model.category.MetaTag</textarea>
+                            </div>
+
+                        </div>
+
+                        <div class="mb-4 row">
+                            <label for="id=" metaDescription" class="form-label-title col-sm-3 mb-0">MetaDescription</label>
+                            <div class="col-sm-9">
+                                <textarea class="form-control" id=" metaDescription" disabled rows="3" aria-valuetext="@Model.category.MetaDescription">@Model.category.MetaDescription</textarea>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <button class="btn btn-animation btn-md fw-bold ms-auto">ویرایش دسته بندی</button>
+
+
+
+            </form>
+        </div>
+    </div>
+</div>
+

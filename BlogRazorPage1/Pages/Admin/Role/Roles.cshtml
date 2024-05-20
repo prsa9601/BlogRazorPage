@@ -1,0 +1,252 @@
+﻿@page 
+@model BlogRazorPage.Pages.Admin.Role.RolesModel
+@{  
+    Layout = "Shared/AdminLayout/_AdminLayout";
+    ViewData["Title"] = "مدیرت نقش ها";
+    ViewData["selected"] = "roles";
+
+}
+@section Header
+{
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Google font -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;500;600;700;800;900&display=swap"
+          rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+    <link id="rtl-link" rel="stylesheet" type="text/css" href="/assets/css/vendors/bootstrap.css">
+    <link id="rtl-link" rel="stylesheet" type="text/css" href="/assets/css/vendors/bootstrap.rtl.css">
+    <link rel="stylesheet" href="/assets/css/animate.min.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/vendors/font-awesome.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/vendors/feather-icon.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/vendors/slick/slick.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/vendors/slick/slick-theme.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/bulk-style.css">
+
+    <!-- Template css -->
+    <link id="color-link" rel="stylesheet" type="text/css" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/custom.css">
+    <link rel="stylesheet" href="/assets/css/font.css">
+    
+   
+  
+}
+@*<li data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="ویرایش">
+    <a asp-page="Edit" asp-route-roleId="@item.Id">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="m16 2.012l3 3L16.713 7.3l-3-3zM4 14v3h3l8.299-8.287l-3-3zm0 6h16v2H4z" /></svg>
+    </a>
+</li>
+
+<li data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="حذف">
+    <delete-item Url="@Url.Page("Delete","DeleteRole",new{roleId=item.Id})" description="">
+
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M6 7H5v13a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7zm4 12H8v-9h2zm6 0h-2v-9h2zm.618-15L15 2H9L7.382 4H3v2h18V4z" /></svg>
+    </delete-item>
+    @*  <a id="Delete" href="javascript:void(0)" onclick="modal(@item.Id);"  class="Delete">@*<input value="@item.Id"/>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M6 7H5v13a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7zm4 12H8v-9h2zm6 0h-2v-9h2zm.618-15L15 2H9L7.382 4H3v2h18V4z" /></svg>
+
+    </a>
+</li>*@
+
+
+        <div class="page-body">
+        <div class="container-fluid">
+        <div class="row">
+        <div class="col-sm-12">
+            <div class="card card-table">
+                <div class="card-body">
+<main class="page-content">
+                <div class="container">
+                   
+                    <h3>@ViewData["title"]</h3>
+                    <br/> 
+                    <a asp-page="Add" class="btn btn-success mb-2">افزودن نقش</a>
+                    <div class="table-responsive card card-body p-0">
+                        <table class="table table-bordered mb-0">
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>عنوان</th>
+                                <th>عملیات</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach (var item in Model.FilterResult.Data)
+                            {
+                                <tr>
+                                    <td>@item.Id</td>
+                                    <td>@item.Title</td>
+                                    <td>
+                                        <li>
+                                            <a class="btn btn-sm btn-primary" asp-page="Edit" asp-route-id="@item.Id">ویرایش</a>
+                                        </li>
+                                    <li data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="حذف">
+                                        <delete-item Url="@Url.Page("Delete","DeleteRole",new{roleId=item.Id})" description="">
+                                                                        
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M6 7H5v13a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7zm4 12H8v-9h2zm6 0h-2v-9h2zm.618-15L15 2H9L7.382 4H3v2h18V4z" /></svg>
+                                        </delete-item>
+
+                                    </li>
+                                    </td>
+                                </tr>
+
+                            }
+                            </tbody>
+                        </table>
+                    </div>
+
+
+                </div>
+</main>
+              
+
+     
+                    <nav class="custome-pagination">
+                    <ul class="pagination justify-content-center">
+
+                            @if (Model.FilterResult.CurrentPage == 1)
+                            {
+                              
+                                <li class="page-item disabled">
+                                    <a class="page-link prev" onclick="changeCommentPage('@(Model.FilterResult.CurrentPage-1)')" href="javascript:void(0)" tabindex="-1" aria-disabled="true">
+                                        <i class="fa-solid fa-angles-right"></i>
+                                    </a>
+                                </li>
+                            }
+
+                         
+                           
+                            @if (Model.FilterResult.CurrentPage > 1)
+                            {
+                                int prevpage = Model.FilterResult.CurrentPage-1;
+                                <li class="page-item">
+                                      <a class="page-link prev" onclick="changeCommentPage('@(Model.FilterResult.CurrentPage-1)')" href="?pageId=@prevpage&take=8" tabindex="-1" aria-disabled="true">
+                                          <i class="fa-solid fa-angles-right"></i>
+                                      </a>
+                                </li>
+                            }
+                          
+                            
+                                @for (var i = Model.FilterResult.StartPage; i <= Model.FilterResult.EndPage; i++)
+                                {     
+                               
+                                @if (i == Model.FilterResult.CurrentPage)
+                                    {
+                                        <li class="page-item active">
+                                          <a class="page-link current" href="javascript:void(0)">@i</a>
+                                        </li>
+                                    }
+                                    else
+                                    {  
+                                        <li class="page-item" aria-current="page">
+                                           <a class="page-link " onclick="changeCommentPage('@i')" href="?pageId=@i&take=8">@i</a>
+                                        </li>
+                                    }
+
+                                }
+                                
+                             
+                            @{
+                                int nextpage = Model.FilterResult.CurrentPage + 1;
+                                @if(Model.FilterResult.CurrentPage!=Model.FilterResult.EndPage){
+                                    <li class="page-item">
+                                        <a class="page-link next" onclick="changeCommentPage('@(Model.FilterResult.CurrentPage+1)')" href="?pageId=@nextpage&take=8" tabindex="+1" aria-disabled="true">
+                                            <i class="fa-solid fa-angles-left"></i>
+                                        </a>
+                                    </li>
+                                }
+                                else
+                                {
+                                   <li class="page-item disabled">
+                                      <a class="page-link next" onclick="changeCommentPage('@(Model.FilterResult.CurrentPage+1)')" href="?pageId=@nextpage&take=8" tabindex="+1" aria-disabled="true">
+                                          <i class="fa-solid fa-angles-left"></i>
+                                      </a>
+                                   </li>
+                                }
+                              
+                            }
+                            </ul>
+                        </nav>
+                    
+                 
+                </div>
+            </div>
+        </div>      </div>
+        </div>
+        </div>
+        </div>
+
+    
+    
+    @section Scripts{
+    <script>
+
+            function CustomDelete(url, Description) {
+                Swal.fire({
+                    title: "آیا از حذف اطمینان دارید ؟",
+                    text: Description,
+                    icon: "warning",
+                    confirmButtonText: "بله ، مطمعا هستم",
+                    cancelButtonText: "خیر",
+                    showCancelButton: true,
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        var token = $("#ajax-token input[name='__RequestVerificationToken']").val();
+                        $.ajax({
+                            url: url,
+                            method: "post",
+                            data: {
+                                __RequestVerificationToken: token
+                            },
+                            beforeSend: function () {
+                                $(".loading").show();
+                            },
+                            complete: function () {
+                                $(".loading").hide();
+                            },
+                        }).done(function (data) {
+                            var res = JSON.parse(data);
+                            if (res.Status === 1) {
+                                Success("", res.Message, true);
+                            } else {
+                                ErrorAlert("", res.Message, res.isReloadPage);
+                            }
+                        });
+                    }
+                });
+            }
+
+
+
+        </script>
+    }
+    
+
+        
+     
+
+    <script src="/assets/js/jquery-3.6.0.min.js"></script>
+    <script src="/global.js"></script>
+    <script src="/assets/js/jquery-ui.min.js"></script>
+    <script src="/assets/js/bootstrap/bootstrap.bundle.min.js"></script>
+    <script src="/assets/js/bootstrap/popper.min.js"></script>
+    <script src="/assets/js/bootstrap/bootstrap-notify.min.js"></script>
+    <script src="/assets/js/feather/feather.min.js"></script>
+    <script src="/assets/js/feather/feather-icon.js"></script>
+    <script src="/assets/js/lazysizes.min.js"></script>
+    <script src="/assets/js/slick/slick.js"></script>
+    <script src="/assets/js/slick/slick-animation.min.js"></script>
+    <script src="/assets/js/slick/custom_slick.js"></script>
+    <script src="/assets/js/ion.rangeSlider.min.js"></script>
+    <script src="/assets/js/quantity-2.js"></script>
+    <script src="/assets/js/filter-sidebar.js"></script>
+    <script src="/assets/js/wow.min.js"></script>
+    <script src="/assets/js/custom-wow.js"></script>
+    <script src="/assets/js/script.js"></script>
+    <script src="/assets/js/theme-setting.js"></script>
+    }
+  

@@ -1,0 +1,80 @@
+﻿@page
+@model BlogRazorPage.Pages.Admin.Category.EditModel
+@{
+    Layout = "Shared/AdminLayout/_AdminLayout";
+    ViewData["Title"] = "AddBlog";
+}
+
+
+
+
+            <div class="page-body">
+
+                <!-- New Product Add Start -->
+                <div class="card">
+                    <div class="card-body">
+                        <div class="card-header-2">
+                            <h5>ایجاد محصول جدید</h5>
+                        </div>
+
+                        <form class="theme-form theme-form-2 mega-form" method="post">
+                            <div class="mb-4 row align-items-center">
+                                <label asp-for="@Model.Title" class="form-label-title col-sm-3 mb-0"></label>
+                                <div class="col-sm-9">
+                                    <input class="form-control" type="text" value="@Model.categoryDto.Title" asp-for="@Model.Title">
+                                </div>
+                                <span asp-validation-for="@Model.Title"></span>
+                            </div>
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="card-header-2">
+                                        <h5>سئو و موتور جستجو</h5>
+                                    </div>
+
+                                    <div class="seo-view">
+                                        <span class="link">https://farscod.ir</span>
+                                        <h5>فلش 64 گیگ sandisk با گارانتی 18 ماهه متین</h5>
+                                        <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. </p>
+                                    </div>
+
+                                    <div class="mb-4 row align-items-center">
+                                        <label asp-for="Slug" class="form-label-title col-sm-3 mb-0"></label>
+                                        <div class="col-sm-9">
+                                            <input asp-for="@Model.Slug" value="@Model.categoryDto.Slug" class="form-control" type="search">
+                                        </div>
+                                        <span asp-validation-for="@Model.Slug"></span>
+
+                                    </div>
+
+                                    <div class="mb-4 row">
+                                        <label class="form-label-title col-sm-3 mb-0" asp-for="MetaTag"></label>
+                                        <div class="col-sm-9">
+                                            <textarea class="form-control" asp-for="MetaTag" rows="3" aria-valuenow="@Model.categoryDto.MetaTag"></textarea>
+                                        </div>
+                                        <span asp-validation-for="@Model.MetaTag"></span>
+
+                                    </div>
+
+                                    <div class="mb-4 row">
+                                        <label class="form-label-title col-sm-3 mb-0" asp-for="MetaDescription"></label>
+                                        <div class="col-sm-9">
+                                            <textarea class="form-control" asp-for="@Model.MetaDescription" rows="3" aria-valuetext="@Model.categoryDto.MetaDescription"></textarea>
+                                        </div>
+                                        <span asp-validation-for="@Model.MetaDescription"></span>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="btn btn-animation btn-md fw-bold ms-auto" >ویرایش دسته بندی</button>
+
+
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+

@@ -1,0 +1,174 @@
+﻿@using BlogRazorPage.Services.Category
+@inject ICategoryService service
+@{
+    var categories = service.GetCategories();
+    var category = categories.Result.Take(5);
+}
+
+<header class="pb-md-4 pb-0">
+    <div class="header-top">
+        <div class="container-fluid-lg">
+            <div class="row">
+              
+
+                <div class="col-xxl-6 col-lg-9 d-lg-block d-none">
+                    <div class="header-offer">
+                        <div class="notification-slider">
+                            <div>
+                                
+                            </div>
+
+                            <div>
+                        
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="top-nav top-header sticky-header">
+        <div class="container-fluid-lg">
+            <div class="row">
+                <div class="col-12">
+                    <div class="navbar-top">
+                        <button class="navbar-toggler d-xl-none d-inline navbar-menu-button" type="button"
+                                data-bs-toggle="offcanvas" data-bs-target="#primaryMenu">
+                            <span class="navbar-toggler-icon">
+                                <i class="fa-solid fa-bars"></i>
+                            </span>
+                        </button>
+                        <a href="index.html" class="web-logo nav-logo">
+                            <img src="assets/images/logo/1.png" class="img-fluid blur-up lazyload" alt="">
+                        </a>
+
+                        <form asp-page="Index" method="get">
+
+                        <div class="middle-box">
+                            <div class="location-box">
+                                
+                            </div>
+
+                            <div class="search-box">
+                                <div class="input-group">
+                                    <input type="search" name="search" class="form-control" placeholder="جستجو در فست کارت ..."
+                                           aria-label="Recipient's username" aria-describedby="button-addon2">
+                                    <button class="btn" type="submit" id="button-addon2">
+                                        <i data-feather="search"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        </form>
+
+                        <div class="rightside-box">
+                          
+                            <ul class="right-side-menu">
+                                <li class="right-side">
+                                    <div class="delivery-login-box">
+                                        <div class="delivery-icon">
+                                            <div class="search-box">
+                                                <i data-feather="search"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                             
+                                <li class="right-side onhover-dropdown">
+                                    <div class="delivery-login-box">
+                                        <div class="delivery-icon">
+                                            <i data-feather="user"></i>
+                                        </div>
+                                        <div class="delivery-detail">
+                                            <h6>سلام,</h6>
+                                            <h5>حساب کاربری من</h5>
+                                        </div>
+                                    </div>
+
+                                    <div class="onhover-div onhover-div-login">
+                                        <ul class="user-box-name">
+                                            
+                                            @{
+                                                if (!User.Identity.IsAuthenticated)
+                                                {
+                                                    <li class="product-box-contain">
+                                                        <i></i>
+                                                        <a href="../../../Auth/Login">ورود</a>
+                                                    </li>
+                                                }
+                                            }
+                                            @{
+
+                                                if (User.Identity.IsAuthenticated)
+                                                {
+                                                    <li class="product-box-contain">
+                                                        <a href="../../../Profile">پروفایل</a>
+                                                    </li>
+                                                }
+
+                                            }
+                                            <li class="product-box-contain">
+                                                <a href="../../../Auth/Register">ثبت نام</a>
+                                            </li>
+
+                                            <li class="product-box-contain">
+                                                <a href="forgot.html">فراموشی رمز عبور</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid-lg">
+        <div class="row">
+            <div class="col-12">
+                <div class="header-nav">
+                    <div class="header-nav-left">
+                       
+
+                    </div>
+
+                    <div class="header-nav-middle">
+                        <div class="main-nav navbar navbar-expand-xl navbar-light navbar-sticky">
+                            <div class="offcanvas offcanvas-collapse order-xl-2" id="primaryMenu">
+                                <div class="offcanvas-header navbar-shadow">
+                                    <h5>منو</h5>
+                                    <button class="btn-close lead" type="button" data-bs-dismiss="offcanvas"
+                                            aria-label="Close"></button>
+                                </div>
+                                <div class="offcanvas-body">
+                                    <ul class="navbar-nav">
+                                        @{
+                                            @foreach (var item in categories.Result)
+                                            {
+                                                <li class="nav-item dropdown">
+                                                    <a class=" dropdown-toggle nav-link" asp-route-id="@item.Id" asp-page="ListProducts">@item.Title</a>
+                                                </li>
+                                            }
+                                        }
+                                      
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="header-nav-right">
+                      
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
