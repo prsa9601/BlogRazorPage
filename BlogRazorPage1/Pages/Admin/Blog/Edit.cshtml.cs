@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using BlogRazorPage.Infrastructure.RazorUtils;
+using BlogRazorPage.Models;
 using BlogRazorPage.Models.Category;
 using BlogRazorPage.Models.Post;
 using BlogRazorPage.Services.Category;
@@ -52,7 +53,25 @@ namespace BlogRazorPage.Pages.Admin.Blog
         public async Task<IActionResult> OnGet(long id)
         {
             CategoryDtos = await _categoryService.GetCategories();
+            if (CategoryDtos.Count == 0)
+            {
+               // var  model = new ApiResult();
+               // var metaData = new MetaData();
+               // metaData.Message = "دسته بندی در سرور وجود ندارد! لطفا اول یک دسته بندی ایجاد کنید.!";
+               // metaData.AppStatusCode = AppStatusCode.NotFound;
+               // model.MetaData = metaData;
+               //// model.MetaData.AppStatusCode = AppStatusCode.NotFound;
+               // model.IsReload = false;
+               // model.IsSuccess = false;
+                HttpContext.Response.Cookies.Append("SystemAlert", "دسته بندی در سرور وجود ندارد!لطفا اول یک دسته بندی ایجاد کنید.!");
+                HttpContext.Response.Cookies.Append("Error404", "دسته بندی در سرور وجود ندارد!لطفا اول یک دسته بندی ایجاد کنید.!");
+
+                return RedirectToPage("../Category/add");
+            }
+
             var post = await _service.GetPostByIdInBack(id);
+            if (post == null)
+                return Redirect("../../Errors/Error404");
             Slug = post.Slug;
             Title = post.Title;
             Description = post.Description;

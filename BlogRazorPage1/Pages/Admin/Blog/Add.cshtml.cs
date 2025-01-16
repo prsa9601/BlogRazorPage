@@ -82,15 +82,8 @@ namespace BlogRazorPage.Pages.Admin.Blog
             
             return RedirectAndShowAlert(result, RedirectToPage("Index"));
         }
-
+     
       
-
-
-
-
-
-
-
 
 
 

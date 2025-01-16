@@ -1,8 +1,9 @@
-﻿using BlogRazorPage.Models.Auth;
-using BlogRazorPage.Models;
+﻿using BlogRazorPage.Models;
+using BlogRazorPage.Models.Auth;
 
 namespace BlogRazorPage.Services.Auth
 {
+
     public class AuthService : IAuthService
     {
         private readonly HttpClient _client;
@@ -24,14 +25,14 @@ namespace BlogRazorPage.Services.Auth
 
         public async Task<ApiResult?> Register(RegisterCommand command)
         {
-             var result = await _client.PostAsJsonAsync($"auth/register", command);
+            var result = await _client.PostAsJsonAsync($"Auth/register", command);
             return await result.Content.ReadFromJsonAsync<ApiResult>();
         }
 
         public async Task<ApiResult<LoginResponse>?> RefreshToken()
         {
             var refreshToken = _accessor.HttpContext.Request.Cookies["refreshToken"];
-            var result = await _client.PostAsync($"auth/refreshToken?refreshToken={refreshToken}", null);
+            var result = await _client.PostAsync($"Auth/refreshToken?refreshToken={refreshToken}", null);
             return await result.Content.ReadFromJsonAsync<ApiResult<LoginResponse>>();
         }
 

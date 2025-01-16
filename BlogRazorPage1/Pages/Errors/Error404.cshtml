@@ -1,0 +1,305 @@
+﻿@page
+@model BlogRazorPage.Pages.Errors.Error404Model
+@{ 
+
+    Layout = null;
+    ViewData["Title"] = "404"; 
+    string? errorTopic = Request.Cookies["404"];
+    HttpContext.Response.Cookies.Delete("Error404");
+    var href = TempData["url"];
+    TempData.Remove("url");
+    //ViewData.Clear();
+
+}
+<Head>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;500;600;700;800;900&display=swap"
+          rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.compat.css" />
+
+    <!-- bootstrap css -->
+    <link id="rtl-link" rel="stylesheet" type="text/css" href="~/assets/css/vendors/bootstrap.css">
+    <link id="rtl-link" rel="stylesheet" type="text/css" href="~/assets/css/vendors/bootstrap.rtl.css">
+
+    <!-- font-awesome css -->
+    <link rel="stylesheet" type="text/css" href="~/assets/css/vendors/font-awesome.css">
+
+    <!-- feather icon css -->
+    <link rel="stylesheet" type="text/css" href="~/assets/css/vendors/feather-icon.css">
+
+    <!-- slick css -->
+    <link rel="stylesheet" type="text/css" href="~/assets/css/vendors/slick/slick.css">
+    <link rel="stylesheet" type="text/css" href="~/assets/css/vendors/slick/slick-theme.css">
+
+    <!-- Iconly css -->
+    <link rel="stylesheet" type="text/css" href="~/assets/css/bulk-style.css">
+
+    <!-- Template css -->
+    <link id="color-link" rel="stylesheet" type="text/css" href="~/assets/css/style.css">
+    <link rel="stylesheet" href="~/assets/css/custom.css">
+    <link rel="stylesheet" href="~/assets/css/font.css">
+</Head>
+<body>
+
+
+<header class="pb-md-4 pb-0">
+    
+</header>
+    
+<div class="mobile-menu d-md-none d-block mobile-cart">
+    <ul>
+        <li class="active">
+            <a href="index.html">
+                <i class="iconly-Home icli"></i>
+                <span>خانه</span>
+            </a>
+        </li>
+
+        <li class="mobile-category">
+            <a href="javascript:void(0)">
+                <i class="iconly-Category icli js-link"></i>
+                <span>دسته بندی</span>
+            </a>
+        </li>
+
+        <li>
+            <a href="search.html" class="search-box">
+                <i class="iconly-Search icli"></i>
+                <span>جستجو</span>
+            </a>
+        </li>
+
+        <li>
+            <a href="wishlist.html" class="notifi-wishlist">
+                <i class="iconly-Heart icli"></i>
+                <span>علاقه‌مندی‌ها</span>
+            </a>
+        </li>
+
+        <li>
+            <a href="cart.html">
+                <i class="iconly-Bag-2 icli fly-cate"></i>
+                <span>سبد خرید</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<!-- mobile fix menu end -->
+<!-- Breadcrumb Section Start -->
+<section class="breadscrumb-section pt-0">
+    <div class="container-fluid-lg">
+        <div class="row">
+            <div class="col-12">
+                <div class="breadscrumb-contain">
+                    <h2>برگه 404</h2>
+                    <nav>
+                        <ol class="breadcrumb mb-0">
+                            <li class="breadcrumb-item">
+                                <a href="index.html">
+                                    <i class="fa-solid fa-house"></i>
+                                </a>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">404</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Breadcrumb Section End -->
+<!-- 404 Section Start -->
+<section class="section-404 section-lg-space">
+    <div class="container-fluid-lg">
+        <div class="row">
+            <div class="col-12">
+                <div class="image-404">
+                    <img src="~/assets/images/inner-page/404.png" class="img-fluid blur-up lazyloaded" alt="">
+                </div>
+            </div>
+
+            <div class="col-12">
+                <div class="contain-404">
+                    @if (errorTopic == null)
+                    {
+                        <h3 class="text-content">
+                            صفحه مورد نظر شما یافت نشد. لینک این
+                            آدرس ممکن است قدیمی باشد یا ممکن است از آخرین باری که شما آن را نشانک کرده اید، آن را جابه جا کرده باشیم.
+                        </h3>
+                    }
+                        
+                    <h3 class="text-content">
+                        @errorTopic
+                    </h3>
+                    <button onclick="location.href = '@href'" class="btn btn-md text-white theme-bg-color mt-4 mx-auto">بازگشت به صفحه قبلی</button>
+                    @* <button onclick="location.href = 'index.html';" class="btn btn-md text-white theme-bg-color mt-4 mx-auto">بازگشت به صفحه اصلی</button> *@
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+    
+<div class="theme-option">
+    <div class="setting-box">
+        <button class="btn setting-button">
+            <i class="fa-solid fa-gear"></i>
+        </button>
+
+        <div class="theme-setting-2">
+            <div class="theme-box">
+                <ul>
+                    <li>
+                        <div class="setting-name">
+                            <h4>رنگ</h4>
+                        </div>
+                        <div class="theme-setting-button color-picker">
+                            <form class="form-control">
+                                <label for="colorPick" class="form-label mb-0">رنگ قالب</label>
+                                <input type="color" class="form-control form-control-color" id="colorPick" value="#0da487" title="Choose your color">
+                            </form>
+                        </div>
+                    </li>
+
+                    <li>
+                        <div class="setting-name">
+                            <h4>حالت</h4>
+                        </div>
+                        <div class="theme-setting-button">
+                            <button class="btn btn-2 outline" id="darkButton">تیره</button>
+                            <button class="btn btn-2 unline" id="lightButton">روشن</button>
+                        </div>
+                    </li>
+
+                    <li>
+                        <div class="setting-name">
+                            <h4>نوع</h4>
+                        </div>
+                        <div class="theme-setting-button rtl">
+                            <button class="btn btn-2 rtl-unline">چپ چین</button>
+                            <button class="btn btn-2 rtl-outline">راست چین</button>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="back-to-top" style="display: none;">
+        <a id="back-to-top" href="#">
+            <i class="fas fa-chevron-up"></i>
+        </a>
+    </div>
+</div>
+<!-- Tap to top end -->
+<!-- Bg overlay Start -->
+<div class="bg-overlay"></div>
+<!-- Bg overlay End -->
+<!-- latest jquery-->
+<script src="~/assets/js/jquery-3.6.0.min.js"></script>
+
+<!-- jquery ui-->
+<script src="~/assets/js/jquery-ui.min.js"></script>
+
+<!-- Bootstrap js-->
+<script src="~/assets/js/bootstrap/bootstrap.bundle.min.js"></script>
+<script src="~/assets/js/bootstrap/popper.min.js"></script>
+<script src="~/assets/js/bootstrap/bootstrap-notify.min.js"></script>
+
+<!-- Lazyload Js -->
+<script src="~/assets/js/lazysizes.min.js"></script>
+
+<!-- Slick js-->
+<script src="~/assets/js/slick/slick.js"></script>
+<script src="~/assets/js/slick/slick-animation.min.js"></script>
+<script src="~/assets/js/slick/custom_slick.js"></script>
+
+<!-- feather icon js-->
+<script src="~/assets/js/feather/feather.min.js"></script>
+<script src="~/assets/js/feather/feather-icon.js"></script>
+
+<!-- script js -->
+<script src="~/assets/js/script.js"></script>
+
+<!-- thme setting js -->
+<script src="~/assets/js/theme-setting.js"></script>
+<script src="Alert.js"></script>
+@*<script src="~/global.js"></script>*@
+
+@* <script>
+        function getCookie(cname) {
+            let name = cname + "=";
+            let decodedCookie = decodeURIComponent(document.cookie);
+            let ca = decodedCookie.split(';');
+            for (let i = 0; i < ca.length; i++) {
+                let c = ca[i];
+                while (c.charAt(0) == ' ') {
+                    c = c.substring(1);
+                }
+                if (c.indexOf(name) == 0) {
+                    return decodeURIComponent(c.substring(name.length, c.length));
+                }
+            }
+            return "";
+        }
+        var result = getCookie("SystemAlert");
+        if (result) {
+            result = JSON.parse(result);
+            if (result.IsSuccess === true) {
+                Success("", result.MetaData.Message, result.isReloadPage);
+            } else {
+                ErrorAlert("", result.MetaData.Message, result.isReloadPage);
+            }
+            deleteCookie("SystemAlert");
+            alert("lll");
+        }
+        if ($(".select2")) {
+            $(".select2").select2();
+        }
+        });
+
+        function Success(title, description, isReload = false) {
+            if (title == null || title == "undefined") {
+                title = "عملیات با موفقیت انجام شد";
+            }
+            if (description == null || description == "undefined") {
+                description = "";
+            }
+            Swal.fire({
+                title: title,
+                text: description,
+                icon: "success",
+                confirmButtonText: "باشه",
+            }).then((result) => {
+                if (isReload === true) {
+                    location.reload();
+                }
+            });
+        }
+        function ErrorAlert(Title, description, isReload = false) {
+            if (Title == null || Title == "undefined") {
+                Title = "مشکلی در عملیات رخ داده است";
+            }
+            if (description == null || description == "undefined") {
+                description = "";
+            }
+            console.log(description);
+
+            Swal.fire({
+                title: Title,
+                html: description,
+                icon: "error",
+                confirmButtonText: "باشه"
+            }).then((result) => {
+                if (isReload === true) {
+                    location.reload();
+                }
+            });
+        }
+
+</script> *@
+   
+</body>

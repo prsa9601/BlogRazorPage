@@ -26,6 +26,7 @@
   <ItemGroup>
     <Content Remove="Pages\Admin\User\Add.cshtml" />
     <Content Remove="Pages\Admin\User\Delete.cshtml" />
+    <Content Remove="wwwroot\Alert.js" />
   </ItemGroup>
 
   <ItemGroup>
@@ -52,6 +53,7 @@
     <None Include="Pages\Admin\User\Delete.cshtml" />
     <None Include="Pages\Auth\Login.cshtml" />
     <None Include="Pages\Auth\Register.cshtml" />
+    <None Include="wwwroot\Alert.js" />
     <None Include="wwwroot\ckeditor\adapters\jquery.js" />
     <None Include="wwwroot\ckeditor\build-config.js" />
     <None Include="wwwroot\ckeditor\CHANGES.md" />
@@ -415,6 +417,7 @@
   <ItemGroup>
     <_ContentIncludedByDefault Remove="Pages\Admin\User\Add.cshtml" />
     <_ContentIncludedByDefault Remove="Pages\Admin\User\Delete.cshtml" />
+    <_ContentIncludedByDefault Remove="wwwroot\Alert.js" />
   </ItemGroup>
 
   <ItemGroup>

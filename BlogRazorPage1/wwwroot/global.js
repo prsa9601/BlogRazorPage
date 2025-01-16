@@ -139,6 +139,7 @@ $(document).ready(function () {
     }
 });
 
+
 function OpenModal(url, name, title) {
     var modalSize = 'modal-lg';
     $(`#${name} .modal-body`).html('');

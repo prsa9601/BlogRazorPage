@@ -118,8 +118,13 @@ app.Use(async (context, next) =>
     if (status == 401)
     {
         var path = context.Request.Path;
-        context.Response.Redirect($"../../../../auth/login?redirectTo={path}");
+        context.Response.Redirect($"../../../../Auth/Login?redirectTo={path}");
     }
+    //else if (status == 404)
+    //{
+    //    var path = context.Request.Path;
+    //    context.Response.Redirect($"../../../../auth/login?redirectTo={path}");
+    //}
 });
 app.UseAuthentication();
 

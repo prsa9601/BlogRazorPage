@@ -1,4 +1,4 @@
-﻿@page
+﻿@page "{handler?}"
 @using BlogRazorPage.Models.Category
 @using BlogRazorPage.Services.Category
 @inject ICategoryService _service
@@ -9,6 +9,14 @@
 }
 @{
     var CategoryDtos = await _service.GetCategories();
+    if (CategoryDtos.Count == 3)
+    {
+        
+        HttpContext.Response.Cookies.Append("SystemAlert", "دسته بندی در سرور وجود ندارد!لطفا اول یک دسته بندی ایجاد کنید.!");
+        HttpContext.Response.Cookies.Append("404", "دسته بندی در سرور وجود ندارد!لطفا اول یک دسته بندی ایجاد کنید.!");
+        TempData["url"] = "../Admin/Category/Add";  
+        Response.Redirect("../../../../errors/error404");
+    }
 }
 
 @section Header
@@ -30,8 +38,8 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
-                <div class="row">
-                    <div class="col-sm-8 m-auto">
+               <div class="row">
+              @*        <div class="col-sm-8 m-auto"> *@
                         <div class="card">
                             <div class="card-body">
                                 <div class="card-header-2">
@@ -135,8 +143,8 @@
                                                 <button class="btn btn-animation btn-md fw-bold ms-auto" >افزودن بلاگ</button>
                                 </form>
                             </div>
-                        </div>
-                    </div>
+                       </div>
+                    @*  </div>*@
                 </div>
             </div>
         </div>
@@ -160,9 +168,50 @@
 
 @section Scripts
 {
-    
+   @*  <script>
+        $(document).ready(getCategories(););
 
-    
+        function getCategories() {
+    $.ajax({
+    url: '/GetCategories', // آدرس متد سرور
+    type: 'GET',
+    success: function (data) {
+    if (data.length === 0) {
+    window.location.href = '../../../../Errors/error404'; // ریدایرکت به صفحه خطا
+    }
+    else {
+    // نمایش دسته‌بندی‌ها
+        @{
+            @var CategoryDtos = data;
+        }
+    }
+    }
+    //,
+    // error: function () {
+    // window.location.href = '/error'; // ریدایرکت به صفحه خطا در صورت بروز خطا
+    // }
+    });
+    }
+</script> *@
+   
+  @*   <script>
+        $(document).ready(function () {
+   
+    var result = getCookie("SystemAlert");
+    if (result) {
+        result = JSON.parse(result);
+        if (result.IsSuccess === true) {
+            Success("", result.MetaData.Message, result.isReloadPage);
+        } else {
+            ErrorAlert("", result.MetaData.Message, result.isReloadPage);
+        }
+        deleteCookie("SystemAlert");
+    }
+    if ($(".select2")) {
+        $(".select2").select2();
+    }
+        });
+    </script> *@
         <script src="//cdn.ckeditor.com/4.24.0-lts/full/ckeditor.js"></script>
 
         <script>

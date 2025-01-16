@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Xml.Linq;
 
-namespace BlogRazorPage.Areas.Admin.Models
+namespace BlogRazorPage.Areas.Admin1.Models
 {
     public class ckeditorViewModel
     {
